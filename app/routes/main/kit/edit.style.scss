@@ -1,0 +1,128 @@
+@use "@abstracts" as *;
+
+// Forward component styles
+@forward "./edit.transfer-modal.style";
+
+// ──────────────────────────────────────────────────────────────
+// Kit Edit Page
+// ──────────────────────────────────────────────────────────────
+
+.kit-edit {
+  @include layout-cols;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+  }
+
+  &__title {
+    font-family: $font-header;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 6rem 2rem;
+    color: $color-foreground-muted;
+    border: 1px dashed $color-border-alpha;
+    border-radius: $radius-lg;
+    text-align: center;
+  }
+
+  &__item-wrapper {
+    position: relative;
+    height: 100%;
+  }
+
+  &__item-link {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  &__menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    background-color: color-mix(in srgb, $color-card 80%, transparent);
+    color: $color-foreground;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      border-color: $color-primary;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Menubar Overrides for Kit Edit
+// ──────────────────────────────────────────────────────────────
+
+.kit-edit {
+  .menubar {
+    display: flex;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    opacity: 1;
+    transition: opacity $transition-duration-unit $transition-ease-in-out;
+
+    &--open {
+      opacity: 1;
+    }
+
+    &__trigger {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Menubar Content Overrides
+// ──────────────────────────────────────────────────────────────
+
+.menubar__content {
+  &--popover {
+    background-color: $color-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+  }
+
+  .menubar__item {
+    font-weight: $font-weight-medium;
+    letter-spacing: $letter-spacing-wide;
+
+    &--destructive {
+      color: $color-destructive;
+
+      &:hover {
+        background-color: color-mix(in srgb, $color-destructive 10%, transparent);
+        color: $color-destructive;
+      }
+    }
+  }
+}

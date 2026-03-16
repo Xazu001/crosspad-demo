@@ -1,0 +1,81 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.Toastify {
+  position: fixed;
+  z-index: 99999;
+}
+
+.Toastify__toast-container {
+  font-family: $font-body;
+}
+
+.Toastify__toast {
+  background-color: $color-card;
+  color: $color-card-foreground;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+
+
+  &.Toastify__toast--dark {
+    background-color: $color-card;
+    color: $color-card-foreground;
+  }
+
+
+  &.Toastify__toast--success {
+    background-color: color.change($color-success, $alpha: 90%);
+    color: oklch(10% 0.02 130deg);
+    border-color: $color-success;
+
+    .Toastify__progress-bar {
+      background-color: oklch(10% 0.02 130deg);
+    }
+  }
+
+
+  &.Toastify__toast--error {
+    background-color: color.change($color-destructive, $alpha: 90%);
+    color: oklch(10% 0.02 19.69deg);
+    border-color: $color-destructive;
+
+    .Toastify__progress-bar {
+      background-color: oklch(10% 0.02 19.69deg);
+    }
+  }
+
+
+  &.Toastify__toast--info {
+    background-color: color.change($color-primary, $alpha: 90%);
+    color: $color-primary-foreground;
+    border-color: $color-primary;
+
+    .Toastify__progress-bar {
+      background-color: $color-primary-foreground;
+    }
+  }
+}
+
+
+.Toastify__progress-bar {
+  height: 4px;
+  border-radius: $radius-full;
+}
+
+
+.Toastify__close-button {
+  color: inherit;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+.Toastify__toast-icon {
+  svg {
+    fill: currentcolor;
+  }
+}

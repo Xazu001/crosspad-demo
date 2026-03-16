@@ -1,0 +1,134 @@
+@use "@abstracts" as *;
+
+.nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  justify-content: center;
+  width: 100%;
+  padding-block: 2rem;
+  padding-inline: $spacing-x-site;
+  pointer-events: none; // Allow clicks to pass through empty spaces
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 96rem;
+    height: 7.75rem;
+    background: $color-popover;
+    border: 1px solid $color-border;
+    border-radius: calc(1.25rem + $radius-md);
+    pointer-events: auto; // Re-enable pointer events for the container itself
+  }
+
+  &__logo {
+    display: flex;
+    flex-grow: 1;
+    padding-left: 3rem;
+    transition: filter $transition-duration-unit $transition-ease-in-out;
+
+    img {      
+      display: block;
+      height: 5rem;
+    }
+
+    &--loading {
+      animation: nav-loading 2s ease-in-out infinite;
+    }
+
+    @include interactive-state {
+      filter: brightness(110%);
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    padding-block: 0.5rem;
+    padding-inline: 1.5rem;
+    border-radius: $radius-sm;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    @include interactive-state {
+      background-color: $color-popover-hover;
+    }
+  }
+
+  &__ctas {
+    display: flex;
+    flex-grow: 1;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    padding: 1.25rem;
+
+    .btn {
+      height: 100%;
+      border-radius: $radius-md;
+    }
+  }
+
+  &__user-menu {
+    height: 4.5rem;
+    aspect-ratio: 1;
+    padding-inline: 2rem;
+    background-color: $color-primary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+  }
+
+  &__user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    .avatar {
+      flex-shrink: 0;
+    }
+  }
+
+  &__user-name {
+    color: $color-foreground;
+    font-size: $text-sm;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  // Menubar styles in nav context
+
+  .menubar {
+    gap: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+@keyframes nav-loading {
+  0% {
+    filter: brightness(100%);
+  }
+
+  50% {
+    filter: brightness(60%);
+  }
+
+  100% {
+    filter: brightness(100%);
+  }
+}

@@ -1,0 +1,67 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+  "account_id": "2c2d268003cea63e8adf013ed5e78764",
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "compatibility_date": "2025-12-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "name": "crosspad-dev",
+  "main": "./worker.ts",
+  "observability": {
+    "enabled": true,
+  },
+  "dev": {
+    "port": 5173,
+  },
+  "vars": {
+    "CONTACT_EMAIL": "xazu.work@gmail.com",
+    "IS_DEV": true,
+  },
+  "d1_databases": [
+    {
+      "binding": "db",
+      "database_name": "crosspad-x-dev",
+      "database_id": "3da05c33-5220-4f9a-a136-60e9dbccabfb",
+      "migrations_dir": "drizzle",
+      "remote": true,
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "r2",
+      "bucket_name": "crosspad-x-dev",
+      "remote": true,
+    },
+  ],
+  "kv_namespaces": [
+    {
+      "id": "62c8a6441b414d9781a5f5d036799fc1",
+      "binding": "kv",
+      "remote": true,
+    },
+  ],
+  "triggers": {
+    "crons": ["* * * * *", "0 0 * * *", "0 1 * * SUN"],
+  },
+  "queues": {
+    "producers": [
+      {
+        "binding": "queue",
+        "queue": "crosspad-x-dev",
+      },
+    ],
+    "consumers": [
+      {
+        "queue": "crosspad-x-dev",
+        "max_batch_size": 10,
+        "dead_letter_queue": "crosspad-x-dev-dlq",
+      },
+    ],
+  },
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "public",
+  },
+}

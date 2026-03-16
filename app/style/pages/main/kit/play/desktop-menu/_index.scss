@@ -1,0 +1,53 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+@use "../tokens" as *;
+@use "./tokens" as local;
+@forward "./sliders";
+@forward "./metronome";
+@forward "./recording";
+@forward "./info";
+@forward "./modal";
+@forward "./controls";
+
+// ──────────────────────────────────────────────────────────────
+// Kit Play Desktop Menu Styles
+// ──────────────────────────────────────────────────────────────
+
+.kit-play-desktop {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    width: 100%;
+
+    .btn {
+      height: 6rem;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Menu Container
+  // ──────────────────────────────────────────────────────────────
+
+  &__menu {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 4rem;
+    height: 100%;
+  }
+
+  &__menu-content {
+    @include card;
+
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 64rem;
+    padding: 0;
+    background-color: var(--kit-play-color-card);
+    border: 1px solid var(--kit-play-color-card-border);
+    border-radius: $radius-xl;
+    
+  }
+}

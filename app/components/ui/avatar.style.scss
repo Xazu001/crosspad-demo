@@ -1,0 +1,95 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.avatar {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  background-color: $color-card;
+  user-select: none;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  img {  
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // Elements
+
+  &__wrapper {
+    display: inline-flex;
+    position: relative;
+  }
+
+  &__fallback {
+    background-color: color.scale($color-card, $lightness: -10%);
+  }
+
+  &__fallback-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // States
+
+  &--loading {
+    opacity: 0;
+  }
+
+  // Shape modifiers
+
+  &--circle {
+    border-radius: $radius-full;
+  }
+
+  &--square {
+    border-radius: $radius-md;
+  }
+
+  // Border modifier
+
+  &--bordered {
+    padding: 1px;
+    background: $color-border;
+    
+    > * {
+      border-radius: inherit;
+    }
+  }
+
+  // Interactive states
+
+  // Only enable hover effects when hover prop is true
+
+  &--hover:hover {
+    box-shadow: $shadow-md;
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    @include focus-visible(1px);
+  }
+
+  // Sizes
+  @include responsive-sizes("avatar", sm md lg xl 2xl) using ($size) {
+    @if $size == sm {
+      width: 4rem;
+      font-size: $text-sm;
+    } @else if $size == md {
+      width: 6rem;
+      font-size: $text-md;
+    } @else if $size == lg {
+      width: 8rem;
+      font-size: $text-lg;
+    } @else if $size == xl {
+      width: 12rem;
+      font-size: $text-xl;
+    } @else if $size == 2xl {
+      width: 16rem;
+      font-size: $text-2xl;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@use "@abstracts" as *;
+
+.stats {
+  &__container {
+    padding-inline: 4rem;
+    color: $color-foreground;
+
+    h2 {
+      font-weight: $font-weight-regular;    
+      line-height: 115%;
+      letter-spacing: $letter-spacing-loose;
+    }
+
+    @include media(">=tablet") {
+      @include layout-cols(8);
+    }
+  }
+}

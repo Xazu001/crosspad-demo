@@ -1,0 +1,117 @@
+@use "@abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+// Fluid Typography
+// ──────────────────────────────────────────────────────────────
+
+:root {
+  --f-font-size: clamp(calc(18rem / 10.5), 15.5vw/7.68, calc(32rem / 16));
+  --text-sm: clamp(1.75rem, 1.75vw, 1.75rem);
+  --text-md: clamp(1.75rem, 2vw, 2rem);
+  --text-lg: clamp(2rem, 2.5vw, 2.5rem);
+  --text-xl: clamp(2.5rem, 3vw, 3rem);
+  --text-2xl: clamp(3rem, 4vw, 4rem);
+  --text-3xl: clamp(3.5rem, 5.5vw, 5.5rem);
+  --text-4xl: clamp(4rem, 7vw, 7rem);
+  --text-5xl: clamp(1rem, 9vw, 9rem);
+  --text-0: clamp(5rem, 16vw, 16.5rem);
+
+  font-size: calc(var(--f-font-size) * 0.25);
+
+  @include media(">=huge") {
+    --text-sm: 1.75rem;
+    --text-md: 2rem;
+    --text-lg: 2.5rem;
+    --text-xl: 3rem;
+    --text-2xl: 4rem;
+    --text-3xl: 5.5rem;
+    --text-4xl: 7rem;
+    --text-5xl: 9rem;
+    --text-0: 16.5rem;
+
+    font-size: 0.40vw;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Global text defaults
+// ──────────────────────────────────────────────────────────────
+
+body {
+  color: $color-foreground;
+  font-family: $font-body;
+  font-size: $text-md;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-regular;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Header font family
+// ──────────────────────────────────────────────────────────────
+
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $font-header;
+  font-weight: $font-weight-semibold;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Heading sizes
+// ──────────────────────────────────────────────────────────────
+
+.h0 {
+  font-size: $text-0;
+}
+
+.text-5xl,
+.h1,
+h1 {
+  font-size: $text-5xl;
+}
+
+.text-4xl,
+.h2,
+h2 {
+  font-size: $text-4xl;
+}
+
+.text-3xl,
+.h3,
+h3 {
+  font-size: $text-3xl;
+}
+
+.text-2xl,
+.h4,
+h4 {
+  font-size: $text-2xl;
+}
+
+.text-xl {
+  font-size: $text-xl;
+}
+
+.text-lg {
+  font-size: $text-lg;
+}
+
+.text-md {
+  font-size: $text-md;
+}
+
+.text-sm {
+  font-size: $text-sm;
+}
+
+strong {
+  font-weight: $font-weight-regular;
+}

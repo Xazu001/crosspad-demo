@@ -1,0 +1,442 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.select-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.select-trigger {
+  display: flex;
+  position: relative;
+  overflow: hidden; // Prevent content from expanding
+  flex-grow: 0;
+  text-overflow: ellipsis;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%; // Prevent expansion beyond container
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // Variants
+
+  &--secondary {
+    background-color: $color-secondary-background;
+    color: $color-secondary-foreground;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-secondary-hover;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--card {
+    background-color: $color-card-background;
+    color: $color-card-foreground;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-card-hover;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: $color-foreground;
+    border: 1px solid $color-border;
+    
+    &:hover {
+      background-color: color.change($color-background, $alpha: 20%);
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--outline-card {
+    background-color: $color-card;
+    color: $color-card-foreground;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-card-hover;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--outline-background {
+    background-color: $color-background;
+    color: $color-foreground;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-secondary;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--outline-secondary {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-secondary-hover;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--outline-popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background-color: $color-popover-hover;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &--glass {
+    @include glass($shadow: false, $hover: true);
+
+    color: $color-foreground;
+
+    &:focus-visible {
+      background: color.change($color-popover, $alpha: 0.4);
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--glass-card {
+    background: $color-glass-card;
+    backdrop-filter: blur(40px) saturate(180%);
+    color: $color-glass-card-foreground;
+    border: 1px solid $color-border-alpha;
+
+    &:hover {
+      background: $color-glass-card-hover;
+    }
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--glass-secondary {
+    background: $color-glass-secondary;
+    backdrop-filter: blur(40px) saturate(180%);
+    color: $color-glass-secondary-foreground;
+    border: 1px solid $color-border-alpha;
+
+    &:hover {
+      background: $color-glass-secondary-hover;
+    }
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  // Icon
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.5rem;
+    color: $color-foreground-muted;
+    pointer-events: none;
+    transition: transform $transition-duration-unit $transition-ease-in-out;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__value {
+    overflow: hidden;
+    flex: 1;
+    min-width: 0; // Allow flex item to shrink
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // Sizes
+  @include responsive-sizes("select", sm md lg) using ($size) {
+    @if $size == sm {
+      height: 4rem;
+      padding-inline: 1.25rem;
+      border-radius: $radius-sm;
+      font-size: $text-sm;
+    } @else if $size == md {
+      height: 4.5rem;
+      padding-inline: 1.5rem;
+      border-radius: $radius-md;
+      font-size: $text-md;
+    } @else if $size == lg {
+      height: 5.5rem;
+      padding-inline: 2rem;
+      border-radius: $radius-lg;
+      font-size: $text-lg;
+    }
+  }
+}
+
+.select-content {
+  position: absolute;
+  z-index: 50;
+  overflow: hidden;
+  width: 100%;
+  min-width: 8rem;
+  background-color: $color-popover;
+  backdrop-filter: blur(8px);
+  border: 1px solid $color-border;
+  border-radius: $radius-md; // Default, overridden by size variants
+  box-shadow: $shadow-md;
+  animation: select-content-show 0.2s $transition-ease-in-out;
+  margin-top: 0.25rem;
+
+  // Variants
+
+  &--popover {
+    background-color: $color-popover;
+    backdrop-filter: blur(8px);
+    border: 1px solid $color-border;
+  }
+
+  &--card {
+    background-color: $color-card;
+    backdrop-filter: none;
+    border: 1px solid $color-border;
+  }
+
+  &--secondary {
+    background-color: $color-secondary;
+    backdrop-filter: none;
+    border: 1px solid $color-border;
+  }
+
+  &--outline {
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    border: 1px solid $color-border;
+  }
+
+  &--upward {
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+    animation: select-content-show-upward 0.2s $transition-ease-in-out;
+  }
+
+  &__viewport {
+    @include scroll;
+
+    overflow-y: auto;
+    max-height: 24rem;
+    padding: 0.5rem;
+  }
+
+  // Sizes
+
+  &--sm {
+    border-radius: $radius-sm !important;
+
+    .select-content__viewport {
+      max-height: 18rem;
+    }
+  }
+
+  &--md {
+    border-radius: $radius-md !important;
+
+    .select-content__viewport {
+      max-height: 24rem;
+    }
+  }
+
+  &--lg {
+    border-radius: $radius-lg !important;
+
+    .select-content__viewport {
+      max-height: 32rem;
+    }
+  }
+}
+
+.select-item {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &:focus-visible {
+    @include focus-visible(-2px);
+  }
+
+  &:disabled,
+  &[data-state="disabled"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--selected {
+    color: $color-primary;
+    font-weight: $font-weight-semibold;
+  }
+
+  &--multiple {
+    padding: 0.75rem 1rem;
+  }
+
+  // Sizes
+
+  &--sm {
+    padding: 0.5rem 0.75rem;
+    border-radius: calc($radius-sm - 0.5rem);
+    font-size: $text-sm;
+  }
+
+  &--md {
+    padding: 0.75rem 1rem;
+    border-radius: calc($radius-md - 0.5rem);
+    font-size: $text-sm;
+  }
+
+  &--lg {
+    padding: 1rem 1.5rem;
+    border-radius: calc($radius-lg - 0.5rem);
+    font-size: $text-md;
+  }
+
+  &__text {
+    overflow: hidden;
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__checkbox {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: $color-background;
+    border: 2px solid $color-border;
+    border-radius: $radius-sm;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+    margin-left: 0.5rem;
+
+    &--checked {
+      background-color: $color-primary;
+      border-color: $color-primary;
+      color: $color-primary-foreground;
+    }
+  }
+
+  &__check {
+    flex-shrink: 0;
+    color: $color-primary;
+  }
+}
+
+// Item colors cascaded from content variant
+
+.select-content--popover .select-item {
+  color: $color-popover-foreground;
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-popover-hover;
+  }
+}
+
+.select-content--card .select-item {
+  color: $color-card-foreground;
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-card-hover;
+  }
+}
+
+.select-content--secondary .select-item {
+  color: $color-secondary-foreground;
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-secondary-hover;
+  }
+}
+
+.select-content--outline .select-item {
+  color: $color-foreground;
+
+  &:hover,
+  &:focus-visible {
+    background-color: color.change($color-background, $alpha: 20%);
+  }
+}
+
+@keyframes select-content-show {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes select-content-show-upward {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

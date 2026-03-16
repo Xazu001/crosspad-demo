@@ -1,0 +1,111 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.file-audio {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  background-color: $color-secondary;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // Hover state
+
+  
+  // Sizes
+
+  &--md {
+    height: 2.5rem;
+    padding: 2rem;
+  }
+
+  // States
+
+  &[data-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &[data-playing="true"] {
+    border-color: $color-primary;
+    background-color: $color-primary-background !important;
+  }
+
+  &:hover:not([data-disabled="true"]) {
+    background-color: $color-secondary-hover;
+  }
+
+
+  // Elements
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
+    color: $color-primary;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background: $color-primary-background;
+    }
+
+    &--active {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    &--delete {
+      color: $color-destructive;
+
+      &:hover {
+        background: $color-destructive-background;
+      }
+    }
+  }
+}
+
+// Elements
+
+.file-audio__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.file-audio__name {
+  overflow: hidden;
+  flex: 1;
+  color: $color-foreground;
+  font-size: $text-md;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.file-audio__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}

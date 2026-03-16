@@ -1,0 +1,52 @@
+{
+  "name": "midifun",
+  "version": "0.1.0",
+  "description": "A powerful MIDI library for React applications",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "midi",
+    "music",
+    "react",
+    "audio",
+    "web-midi"
+  ],
+  "author": "Xazu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Xazu/crosspad",
+    "directory": "packages/midifun"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    }
+  }
+}

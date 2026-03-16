@@ -1,0 +1,323 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// WebAppAnimation color tokens
+$color-web-app-close: #FE6057;
+$color-web-app-minimize: #ffbc2f;
+$color-web-app-maximize: #28C83F;
+
+// WebAppAnimation derived colors
+$color-web-app-screen-bg: color.adjust($color-glass-card, $lightness: 5%);
+$color-web-app-nav-bg: color.adjust($color-glass-card, $lightness: 15%);
+$color-web-app-border: color.adjust($color-glass-card, $lightness: 15%);
+$color-web-app-search-input-bg: color.adjust($color-glass-card, $lightness: -15%);
+$color-web-app-loading-primary: color.adjust($color-primary, $lightness: 5%, $alpha: 1);
+$color-web-app-search-icon: color.adjust($color-glass-card, $lightness: 25%, $alpha: 1);
+$color-web-app-skeleton-base: color.adjust($color-glass-card, $lightness: 15%);
+$color-web-app-skeleton-highlight: color.adjust($color-web-app-skeleton-base, $lightness: 10%);
+
+.about {
+  // overflow: hidden;
+  min-height: 100dvh;
+  padding-block: 24rem;
+
+  &__container {
+    @include layout-cols(12);
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    
+    @include media(">=large-desktop") {
+      @include layout-cols(10);
+    }
+  }
+
+  &__item {
+    @include glass-card;
+
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    flex-direction: column;
+    width: 360px;
+    color: white;
+    border: none;
+
+
+
+    &-number {
+      position: absolute;
+      top: 2rem;
+      z-index: 2;
+      padding-inline: 2rem;
+      color: $color-glass-card-foreground;
+      font-size: $text-2xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    &-animation {
+      margin-top: 6rem;
+      margin-bottom: 2rem;
+    }
+
+    &-content {
+      display: flex;
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 1rem;
+      height: 100%;
+      padding: 2rem;
+    }
+
+    &-description {
+      width: 65%;
+      color: $color-glass-card-foreground;
+      opacity: 0.75;
+      line-height: $line-height-relaxed-more;
+    }
+  }
+}
+
+.web-app-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 1.5cqw;
+
+  &-screen {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    width: 100%;
+    max-width: 75%;
+    aspect-ratio: 16/9;
+    background-color: $color-web-app-screen-bg;
+    border: 0.375em solid $color-web-app-border;
+    border-radius: $radius-lg;
+  }
+
+  &-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    width: 100%;
+    height: 2.25em;
+    padding-inline: 1em;
+    background-color: $color-web-app-nav-bg;
+  }
+
+  &-dot {
+    width: 1em;
+    height: 1em;
+    aspect-ratio: 1;
+    border-radius: $radius-full;
+    transform: translateY(-12.5%);
+
+    &:nth-child(1) {
+      background-color: $color-web-app-close;
+    }
+
+    &:nth-child(2) {
+      background-color: $color-web-app-minimize;
+    }
+
+    &:nth-child(3) {
+      background-color: $color-web-app-maximize;
+    }
+  }
+
+  &-content {
+    position: relative;
+    flex: 1;
+  }
+
+  &-search-input {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    height: 2.5em;
+    padding: 1em;
+    background-color: $color-web-app-search-input-bg;
+    border: 0.2em solid $color-web-app-border;
+    border-radius: $radius-full;
+    transform: translate(-50%, -50%);
+
+    p {
+      color: $color-glass-card-foreground;
+    }
+  }
+
+  &-search-icon {
+    position: relative;
+    width: 2em !important;
+    height: 2em !important;
+    color: $color-web-app-search-icon;
+  }
+
+  &-loading {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 3.5em;
+    height: 3.5em;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+
+    &-bar {
+      position: absolute;
+      width: 0.25em;
+      height: 0.8em;
+      background-color: $color-web-app-loading-primary;
+      border-radius: $radius-full;
+      transform-origin: center 1.75em;
+
+      @for $i from 1 through 12 {
+        &:nth-child(#{$i}) {
+          opacity: 0.1;
+          transform: translateY(-1.25em) rotate(#{($i - 1) * 30}deg);
+        }
+      }
+    }
+  }
+
+  &-skeleton {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-top: 4em;
+
+    &-header,
+    &-content,
+    &-content::after {
+      background: linear-gradient(
+        90deg,
+        $color-web-app-skeleton-base 0%,
+        $color-web-app-skeleton-highlight 50%,
+        $color-web-app-skeleton-base 100%
+      );
+      background-size: 200% 100%;
+      border-radius: $radius-lg;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    &-header {
+      width: 40%;
+      height: 2em;
+    }
+
+    &-content {
+      position: relative;
+      width: 55%;
+      height: 2em;
+      margin-top: 2em;
+
+      &::after {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2em;
+        border-radius: $radius-lg;
+        content: "";
+        transform: translateY(150%);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+  }
+
+  @include media(">=tablet") {
+    font-size: 1cqw;
+  }
+
+  @include media(">=desktop") {
+    font-size: 0.65cqw !important;
+  }
+
+  @media screen and (width >= 1000px) {
+    font-size: 0.75cqw;
+  }
+}
+
+.mobile-app-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5cqw;
+
+  &-screen {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    height: 24rem;
+    aspect-ratio: 9/16;
+    padding: 1em;
+    background-color: $color-web-app-screen-bg;
+    border: 0.375em solid $color-web-app-border;
+    border-radius: $radius-lg;
+  }
+
+  &-content {
+    display: flex;
+    position: relative;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.25em;
+    width: 100%;
+  }
+
+  &-square {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: $color-web-app-loading-primary;
+    border-radius: $radius-sm * 0.5;
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  @include media(">=tablet") {
+    font-size: 1cqw;
+  }
+
+  @include media(">=desktop") {
+    font-size: 0.65cqw !important;
+  }
+
+  @media screen and (width >= 1000px) {
+    font-size: 0.75cqw;
+  }
+}

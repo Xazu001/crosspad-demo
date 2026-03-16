@@ -1,0 +1,54 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.newsletter {
+  padding-inline: $spacing-x-site;
+  padding-top: 28rem;
+  padding-bottom: 12rem;
+
+  &__container {
+    @include layout-cols(12);
+
+    padding-block: 10rem;
+    padding-inline: 4rem;
+    background-color: color.adjust($color-primary, $lightness: 0%);
+    color: $color-primary-foreground;
+    border-radius: $radius-2xl;
+
+    h2 {
+      text-transform: uppercase;
+    }
+
+    p {
+      opacity: 0.8;
+      font-size: $text-lg;
+      font-weight: $font-weight-medium;
+    }
+
+
+    @include media(">=desktop") {
+      @include layout-cols(10);
+
+      padding-inline: 8rem;
+    }
+  }
+
+  &__form {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+    padding-top: 8rem;
+
+    .input {
+      max-width: 54rem;
+      border-color: $color-primary-foreground;
+      
+      &:focus-visible {
+        border-color: $color-primary-foreground;
+      }
+    }
+  }
+
+  
+
+}

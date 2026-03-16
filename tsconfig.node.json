@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "vite.config.ts",
+    "react-router.config.ts",
+    "worker.ts",
+    "server/**/*",
+    "shared/**/*",
+    "scripts/**/*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "types": ["node", "vite/client", "./worker-configuration.d.ts"],
+    "lib": ["ES2022"],
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "#/*": ["./app/*"],
+      "$/*": ["./server/*"],
+      "@/*": ["./shared/*"]
+    }
+  }
+}

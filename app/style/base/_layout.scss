@@ -1,0 +1,76 @@
+@use "@abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+// Layout Variables
+// ──────────────────────────────────────────────────────────────
+
+:root {
+  --container-max-width: 100%;
+  --spacing-x-site: 2rem;
+
+  @include media(">=phone") {
+    --spacing-x-site: 4rem;
+  }
+
+  @include media(">=desktop") {
+    --spacing-x-site: 6rem;
+  }
+
+  @include media(">=large-desktop") {
+    --spacing-x-site: 4vw;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Base Layout
+// ──────────────────────────────────────────────────────────────
+
+main {
+  min-height: 100dvh;
+  padding-top: $spacing-top-site;
+  padding-bottom: 4rem;
+}
+
+.nopt {
+  padding-top: 0;
+}
+
+.nopb {
+  padding-bottom: 0;
+}
+
+section {
+  padding-inline: $spacing-x-site;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Layout Grid (Dev Tool)
+// ──────────────────────────────────────────────────────────────
+
+.layout-grid {
+  display: grid;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  grid-template-columns: repeat($grid-columns-mobile, 1fr);
+  column-gap: $grid-gutter;
+  width: 100%;
+  height: 100%;
+  padding-inline: $spacing-x-site;
+  pointer-events: none;
+
+  &__col {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255 0 0 / 10%);
+    border-inline: 1px dashed rgb(255 0 0 / 20%);
+  }
+
+  @include media(">=tablet") {
+    grid-template-columns: repeat($grid-columns-tablet, 1fr);
+  }
+
+  @include media(">=desktop") {
+    grid-template-columns: repeat($grid-columns, 1fr);
+  }
+}

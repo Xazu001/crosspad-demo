@@ -1,0 +1,1 @@
+ALTER TABLE `user_rights` ADD `user_admin` integer DEFAULT false;

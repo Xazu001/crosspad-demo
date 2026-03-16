@@ -1,0 +1,130 @@
+@use "@abstracts" as *;
+@use "sass:list" as list;
+
+// ================================================================
+// ------------------------ SPLIT LAYOUT ---------------------------
+// ================================================================
+
+// Split ratio definitions: (left-flex, right-flex)
+$_split-ratios: (
+  "50-50": (1, 1),
+  "40-60": (2, 3),
+  "60-40": (3, 2),
+  "30-70": (3, 7),
+  "70-30": (7, 3),
+  "33-67": (1, 2),
+  "67-33": (2, 1),
+);
+
+// Generates row mode + split ratio styles
+@mixin split-row-mode {
+  flex-direction: row;
+
+  // Apply reverse only when reverse prop is true (above breakpoint)
+
+  &.split-layout--reverse {
+    flex-direction: row-reverse;
+  }
+
+  &.split-layout--auto {
+    .split-layout__side {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  @each $name, $values in $_split-ratios {
+    &.split-layout--#{$name} {
+      .split-layout__side--left {
+        flex: list.nth($values, 1);
+      }
+
+      .split-layout__side--right {
+        flex: list.nth($values, 2);
+      }
+    }
+  }
+}
+
+// ================================================================
+
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &[data-center-vertical="true"] {
+    align-items: center;
+  }
+
+  // Reverse only above breakpoint (in row mode)
+  // Handled in split-row-mode mixin
+
+  // Reverse only below breakpoint
+
+  &[data-reverse-below-breakpoint="true"] {
+    // Apply reverse only when below breakpoint
+    @each $bp in "phone", "tablet", "desktop", "large-desktop", "xlarge-desktop", "huge" {
+      &[data-breakpoint="#{$bp}"] {
+        @include media("<" + $bp) {
+          flex-direction: column-reverse;
+        }
+      }
+    }
+  }
+
+  // Dynamic breakpoint: row mode activates at specified breakpoint
+  @each $bp in "phone", "tablet", "desktop", "large-desktop", "xlarge-desktop", "huge" {
+    &[data-breakpoint="#{$bp}"] {
+      @include media(">=" + $bp) {
+        @include split-row-mode;
+      }
+    }
+  }
+}
+
+// ================================================================
+// ---------------------------- SIDE ------------------------------
+// ================================================================
+
+.split-layout__side {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &--center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--scrollable {
+    overflow-y: auto;
+  }
+}
+
+// ================================================================
+// -------------------- ANIMATION & TRANSITIONS --------------------
+// ================================================================
+
+.split-layout {
+  transition: gap $transition-duration-unit $transition-ease-in-out;
+}
+
+.split-layout__side {
+  transition: flex $transition-duration-unit $transition-ease-in-out;
+}
+
+// ================================================================
+// -------------------- PRINT STYLES ------------------------------
+// ================================================================
+
+@media print {
+  .split-layout {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .split-layout__side {
+    break-inside: avoid;
+  }
+}

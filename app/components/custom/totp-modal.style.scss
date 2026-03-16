@@ -1,0 +1,33 @@
+// ──────────────────────────────────────────────────────────────
+// TOTP Modal Styles
+// ──────────────────────────────────────────────────────────────
+
+@use "../../style/abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+
+.totp-modal {
+  @include modal-content;
+
+  &__title {
+    @include modal-title;
+  }
+
+  &__message {
+    @include modal-message;
+  }
+
+  &__input {
+    font-size: $text-lg;
+    letter-spacing: 0.5em;
+    text-align: center;
+  }
+
+  &__error {
+    @include modal-error;
+  }
+
+  &__actions {
+    @include modal-actions;
+  }
+}

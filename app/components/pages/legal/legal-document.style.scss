@@ -1,0 +1,156 @@
+@use "@abstracts" as *;
+
+.legal-doc {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding-inline: $spacing-x-site;
+  padding-top: 14rem;
+  padding-bottom: 6rem;
+
+  &__section,
+  &__subsection {
+    // Scroll margin for anchor links - positions target 12rem from viewport top
+    scroll-margin-top: 12rem;
+  }
+
+  &__container {
+    @include layout-cols(10);
+
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+
+    @include media(">=desktop") {
+      @include layout-cols(8);
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-4xl;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+  }
+
+  &__date {
+    color: $color-foreground-muted;
+    font-size: $text-sm;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+      max-width: 72rem;
+      color: $color-foreground-muted;
+      font-size: $text-md;
+      line-height: $line-height-relaxed;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__section-title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-2xl;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+    margin-top: 0.5rem;
+  }
+
+  &__subsection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  &__subsection-title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__paragraph {
+    max-width: 72rem;
+    color: $color-foreground-muted;
+    font-size: $text-md;
+    line-height: $line-height-relaxed;
+
+    strong {
+      color: $color-foreground;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding-left: 1.5rem;
+
+    li {
+      color: $color-foreground-muted;
+      font-size: $text-md;
+      line-height: $line-height-relaxed;
+
+      strong {
+        color: $color-foreground;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+
+  &__link {
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      color: $color-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      border-radius: $radius-sm;
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__cookie-button-wrapper {
+    margin: 1rem 0;
+  }
+
+  &__manage-cookies-btn {
+    font-size: $text-sm;
+  }
+}

@@ -1,0 +1,134 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+@forward "./desktop";
+@forward "./mobile";
+@forward "./desktop-menu";
+@forward "./mobile-menu";
+
+// ──────────────────────────────────────────────────────────────
+// Kit Play Main Styles
+// ──────────────────────────────────────────────────────────────
+
+.kit-play-main {
+  --kit-play-color-main: "";
+  --kit-play-color-main-hover: "";
+  --kit-play-color-main-foreground: "";
+  --kit-play-color-border: "";
+  --kit-play-color-card: "";
+  --kit-play-color-card-border: "";
+  --kit-play-color-background: "";
+  --kit-play-color-foreground: "";
+
+  overflow: hidden !important;
+  height: 100dvh;
+  padding: 4rem 0 !important;
+  padding-top: 16rem !important;
+  background-color: var(--kit-play-color-background);
+}
+
+@include media("<=tablet") {
+  .kit-play-main {
+    padding: 0 !important;
+    padding-top: 8rem !important;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Kit Play Container & Loading
+// ──────────────────────────────────────────────────────────────
+
+.kit-play {
+  height: 100%;
+
+  &__container {
+    @include layout-cols(12);
+  }
+
+  &__loading {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    background-color: color.adjust($color: $color-background, $lightness: -2.5%);
+    text-align: center;
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem; 
+    }
+
+    &-spinner {
+      width: 18rem;
+      height: 18rem;
+      animation: spinner-animation 3s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &--visible {
+      opacity: 1;
+      transition: opacity 0.3s ease-out;
+    }
+
+    &--hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-out;
+    }
+  }
+
+  &__progress-wrapper {
+    padding-top: 6rem;
+  }
+
+  &__progress {
+    font-size: $text-2xl;
+    
+    &--error {
+      color: $color-destructive;
+    }
+  }
+
+  @include media("<=tablet") {
+    padding-inline: 0 !important;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Spinner Animation
+// ──────────────────────────────────────────────────────────────
+
+@keyframes spinner-animation {
+  0% {
+    transform: rotate(0deg) scale(1) translateZ(0);
+  }
+
+  25% {
+    transform: rotate(90deg) scale(0.6) translateZ(0);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1) translateZ(0);
+  }
+
+  75% {
+    transform: rotate(270deg) scale(0.6) translateZ(0);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1) translateZ(0);
+  }
+}

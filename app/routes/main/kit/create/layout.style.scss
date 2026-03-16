@@ -1,0 +1,126 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+@forward "./layout.samples.style";
+@forward "./layout.about.style";
+@forward "./layout.colors.style";
+
+// ──────────────────────────────────────────────────────────────
+// Kit Create Page Styles
+// ──────────────────────────────────────────────────────────────
+
+.kit-create {
+  // overflow: hidden;
+
+  &__container {
+    @include layout-cols;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: start;
+    gap: 8rem;
+
+    @include media(">=tablet") {
+      @include layout-cols(12);
+    }
+
+    @include media(">=desktop") {
+      @include layout-cols(10);
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Menu Section
+  // ──────────────────────────────────────────────────────────────
+
+  &__menu {
+    display: none;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: start;
+
+    @include media(">=tablet") {
+      display: flex;
+      grid-column: span 4;
+    }
+
+    @include media(">=desktop") {
+      grid-column: span 3;
+    }
+
+    @include media(">=large-desktop") {
+      grid-column: span 4;
+    }
+
+    @include media(">=xlarge-desktop") {
+      grid-column: span 3;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Content Wrapper
+  // ──────────────────────────────────────────────────────────────
+
+  &__wrapper {
+    flex-grow: 0;
+    grid-column: span 12;
+
+    @include media(">=tablet") {
+      grid-column: span 8;
+    }
+
+    @include media(">=desktop") {
+      grid-column: span 9;
+    }
+
+    @include media(">=large-desktop") {
+      grid-column: span 8;
+    }
+
+    @include media(">=xlarge-desktop") {
+      grid-column: span 9;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Pads Grid
+// ──────────────────────────────────────────────────────────────
+
+.pads {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12rem;
+
+  &__container {
+    display: grid;
+    flex-grow: 0;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: clamp(240px, 72rem, 640px);
+  }
+
+  &__pad {
+    display: flex;
+    flex-grow: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 1;
+    padding: 0 2rem;
+    background-color: $color-card;
+    border-radius: $radius-md;
+    box-shadow: $shadow-md;
+    cursor: pointer;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  & .select-trigger {
+    width: 12rem;
+  }
+}

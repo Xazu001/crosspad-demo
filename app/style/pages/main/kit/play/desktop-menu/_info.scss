@@ -1,0 +1,35 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+@use "../tokens" as *;
+@use "./tokens" as local;
+
+.kit-play-desktop {
+  &__info-wrapper {
+    @include local.panel-wrapper;
+  }
+
+  &__info-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+    text-align: left;
+  }
+
+  &__info-owner-name {
+    display: block;
+    margin-top: 2rem;
+    color: var(--kit-play-color-main);
+    font-size: $text-2xl;
+  }
+
+  &__info-description {
+    max-width: 720px;
+    color: var(--kit-play-color-foreground);
+    opacity: 0.7;
+    font-size: $text-lg;
+    line-height: $line-height-relaxed;
+    margin-top: 1rem;
+  }
+}

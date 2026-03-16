@@ -1,0 +1,126 @@
+@use "@abstracts" as *;
+
+.contact {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding-inline: $spacing-x-site;
+  padding-top: 14rem;
+  padding-bottom: 6rem;
+
+  &__container {
+    @include layout-cols(10);
+
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+
+    @include media(">=desktop") {
+      @include layout-cols(6);
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-4xl;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+  }
+
+  &__subtitle {
+    color: $color-foreground-muted;
+    font-size: $text-lg;
+    line-height: $line-height-relaxed;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &--checkbox {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+      padding-block: 0.5rem;
+
+      .label {
+        font-size: $text-lg;
+      }
+
+      .checkbox {
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+      }
+    }
+  }
+
+  &__hint {
+    color: $color-foreground-muted;
+    font-size: $text-sm;
+    line-height: $line-height-relaxed;
+  }
+
+  &__deletion-notice {
+    margin-top: 0.5rem;
+
+    a {
+      color: $color-primary;
+      font-weight: $font-weight-medium;
+      text-decoration: underline;
+      transition: color $transition-duration-unit $transition-ease-in-out;
+
+      &:hover {
+        color: $color-primary-hover;
+      }
+    }
+  }
+
+  &__alert-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  // Links in labels
+
+  a {
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      color: $color-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      border-radius: $radius-sm;
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+}

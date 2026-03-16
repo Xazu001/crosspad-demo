@@ -1,0 +1,74 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.alert {
+  position: relative;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: $radius-lg;
+  font-family: $font-body;
+
+  // Elements
+
+  &__title {
+    font-size: $text-md;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-none;
+    margin-bottom: 0.25rem;
+  }
+
+  &__description {
+    opacity: 0.9;
+    font-size: $text-md;
+    line-height: $line-height-relaxed;
+  }
+
+  // Variants
+
+  &--popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+    border-color: $color-border;
+  }
+
+  &--glass-destructive {
+    background-color: color.scale($color-destructive, $alpha: -85%);
+    border-color: color.scale($color-destructive, $alpha: -50%);
+    color: $color-destructive;
+
+    .alert__description {
+      color: $color-destructive;
+    }
+  }
+
+  &--glass-success {
+    background-color: color.scale($color-success, $alpha: -85%);
+    border-color: color.scale($color-success, $alpha: -50%);
+    color: $color-success;
+
+    .alert__description {
+      color: $color-success;
+    }
+  }
+
+  // Text variants
+
+  &--text-destructive {
+    color: $color-destructive;
+    border-color: color.scale($color-destructive, $alpha: -50%);
+
+    .alert__title {
+      color: $color-destructive;
+    }
+  }
+
+  &--text-success {
+    color: $color-success;
+    border-color: color.scale($color-success, $alpha: -50%);
+
+    .alert__title {
+      color: $color-success;
+    }
+  }
+}

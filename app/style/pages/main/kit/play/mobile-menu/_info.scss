@@ -1,0 +1,41 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.kit-play-mobile {
+  &__info-wrapper {
+    position: fixed;
+    bottom: -100%;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    padding-inline: $spacing-x-site;
+    padding-top: $spacing-top-site;
+    background-color: var(--kit-play-color-background);
+    transition: all calc($transition-duration-unit * 1.5) $transition-ease-in-out;
+
+    &--active {
+      bottom: 0%;
+    }
+  }
+
+  &__info-container {
+    @include layout-cols;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  &__info-owner-name {
+    color: var(--kit-play-color-main);
+    font-size: $text-3xl;
+  }
+
+  &__info-description {
+    color: var(--kit-play-color-foreground);
+    opacity: 0.8;
+    font-size: $text-lg;
+    line-height: $line-height-loose;
+  }
+}

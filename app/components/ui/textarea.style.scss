@@ -1,0 +1,113 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.textarea {
+  display: flex;
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem 1rem;
+  background-color: $color-secondary;
+  color: $color-foreground;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $text-md;
+  line-height: $line-height-relaxed;
+  resize: vertical;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // States
+
+  &::placeholder {
+    color: color.change($color-foreground, $alpha: 50%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Variants
+
+  &--secondary {
+    background-color: $color-secondary-background;
+    color: $color-secondary-foreground;
+    border-color: $color-border;
+  }
+
+  &--card {
+    background-color: $color-card-background;
+    color: $color-card-foreground;
+    border-color: $color-border;
+  }
+
+  &--outline {
+    background-color: transparent;
+    border-color: $color-border;
+  }
+
+  &--outline-card {
+    background-color: $color-card;
+    color: $color-card-foreground;
+    border-color: $color-border;
+  }
+
+  &--outline-background {
+    background-color: $color-background;
+    color: $color-foreground;
+    border-color: $color-border;
+  }
+
+  &--outline-secondary {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+    border-color: $color-border;
+  }
+
+  &--outline-popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+    border-color: $color-border;
+  }
+
+  &--glass {
+    background-color: color.change($color-background, $alpha: 50%);
+    backdrop-filter: blur(8px);
+    border-color: $color-border-alpha;
+  }
+
+  &--glass-card {
+    background: $color-glass-card-background;
+    backdrop-filter: blur(8px);
+    color: $color-glass-card-foreground;
+    border-color: $color-border-alpha;
+  }
+
+  &--glass-secondary {
+    background: $color-glass-secondary-background;
+    backdrop-filter: blur(8px);
+    color: $color-glass-secondary-foreground;
+    border-color: $color-border-alpha;
+  }
+
+  // Sizes
+  @include responsive-sizes("textarea", sm md lg) using ($size) {
+    @if $size == sm {
+      min-height: 80px;
+      padding: 0.5rem 0.75rem;
+      font-size: $text-sm;
+    } @else if $size == md {
+      min-height: 100px;
+      padding: 0.75rem 1rem;
+      font-size: $text-md;
+    } @else if $size == lg {
+      min-height: 120px;
+      padding: 1rem 1.25rem;
+      font-size: $text-lg;
+    }
+  }
+}

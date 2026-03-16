@@ -1,0 +1,48 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// File Input Component
+// ──────────────────────────────────────────────────────────────
+
+// Variants
+
+.file-input--secondary {
+  .file-input__filename {
+    color: $color-secondary-foreground-muted;
+  }
+}
+
+.file-input--card {
+  .file-input__filename {
+    color: $color-card-foreground-muted;
+  }
+}
+
+.file-input__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-input__input {
+  display: none;
+}
+
+.file-input__content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-input__filename {
+  color: $color-foreground-muted;
+  font-family: $font-body;
+  font-size: $text-sm;
+}
+
+.file-input__error {
+  color: $color-destructive;
+  font-size: $text-sm;
+  font-weight: $font-weight-regular;
+}

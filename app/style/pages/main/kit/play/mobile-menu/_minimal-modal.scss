@@ -1,0 +1,28 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.kit-play-mobile {
+  &__minimal-modal {
+    display: flex;
+    position: fixed;
+    bottom: -100%;
+    left: 50%;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 10rem;
+    padding-inline: $spacing-x-site;
+    transform: translateX(-50%);
+    transition: all calc($transition-duration-unit * 1.5) $transition-ease-in-out;
+
+    &--active {
+      bottom: 9rem;
+    }
+
+    & > div {
+      width: 100%;
+      max-width: 560px;
+    }
+  }
+}

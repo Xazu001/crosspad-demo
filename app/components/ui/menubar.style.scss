@@ -1,0 +1,256 @@
+@use "@abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+// Menubar Root
+// ──────────────────────────────────────────────────────────────
+
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+
+  // Direction
+
+  &--row {
+    flex-direction: row;
+  }
+
+  &--col {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  // Sizes
+
+  &--sm {
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  &--md { 
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  &--lg {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  // Variants
+
+  &--popover {
+    background-color: $color-popover;
+    border: 1px solid $color-border;
+  }
+
+  &--secondary {
+    background-color: $color-secondary;
+    border: 1px solid $color-border;
+  }
+
+  &--card {
+    background-color: $color-card;
+    border: 1px solid $color-border;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Trigger (cascaded from root variant)
+// ──────────────────────────────────────────────────────────────
+
+.menubar__trigger {
+  @include focus-visible;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: $color-foreground;
+  border-radius: $radius-md;
+  outline: none;
+  font-size: $text-sm;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.menubar--popover .menubar__trigger {
+  &:hover:not([data-disabled]) {
+    background-color: $color-popover-hover;
+    color: $color-popover-foreground;
+  }
+
+  &[data-state="open"] {
+    background-color: $color-popover-hover;
+    color: $color-popover-foreground;
+  }
+}
+
+.menubar--secondary .menubar__trigger {
+  &:hover:not([data-disabled]) {
+    background-color: $color-secondary-hover;
+    color: $color-secondary-foreground;
+  }
+
+  &[data-state="open"] {
+    background-color: $color-secondary-hover;
+    color: $color-secondary-foreground;
+  }
+}
+
+.menubar--card .menubar__trigger {
+  &:hover:not([data-disabled]) {
+    background-color: $color-card-hover;
+    color: $color-card-foreground;
+  }
+
+  &[data-state="open"] {
+    background-color: $color-card-hover;
+    color: $color-card-foreground;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Content (portaled, uses own variant class)
+// ──────────────────────────────────────────────────────────────
+
+.menubar__content {
+  min-width: 200px;
+  padding: 0.5rem;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  animation: menubar-content-open 0.2s ease-out;
+
+  // Hidden state - keeps content mounted but invisible
+  // This allows modals inside to stay open when menubar closes
+
+  &--hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &--popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+  }
+
+  &--secondary {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+  }
+
+  &--card {
+    background-color: $color-card;
+    color: $color-card-foreground;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Item (cascaded from content variant)
+// ──────────────────────────────────────────────────────────────
+
+.menubar__item {
+  @include focus-visible;
+
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: $radius-md;
+  outline: none;
+  font-size: $text-sm;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &[data-disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.menubar__content--popover .menubar__item {
+  color: $color-popover-foreground;
+
+  &:hover,
+  &:focus-visible,
+  &[data-highlighted] {
+    background-color: $color-popover-hover;
+    color: $color-popover-foreground;
+  }
+}
+
+.menubar__content--secondary .menubar__item {
+  color: $color-secondary-foreground;
+
+  &:hover,
+  &:focus-visible,
+  &[data-highlighted] {
+    background-color: $color-secondary-hover;
+    color: $color-secondary-foreground;
+  }
+}
+
+.menubar__content--card .menubar__item {
+  color: $color-card-foreground;
+
+  &:hover,
+  &:focus-visible,
+  &[data-highlighted] {
+    background-color: $color-card-hover;
+    color: $color-card-foreground;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Other parts
+// ──────────────────────────────────────────────────────────────
+
+.menubar__separator {
+  height: 1px;
+  margin: 0.5rem 0;
+  background-color: $color-border;
+}
+
+.menubar__label {
+  padding: 0.5rem 1rem;
+  color: $color-foreground-muted;
+  font-size: $text-sm;
+  font-weight: $font-weight-medium;
+  cursor: default;
+}
+
+.menubar__shortcut {
+  color: $color-foreground-muted;
+  font-family: monospace;
+  font-size: $text-sm;
+  margin-left: auto;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Animations
+// ──────────────────────────────────────────────────────────────
+
+@keyframes menubar-content-open {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

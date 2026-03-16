@@ -1,0 +1,36 @@
+@use "@abstracts" as *;
+
+
+.profile__content-profile {
+  &-info {
+    display: flex;
+    gap: 3rem;
+
+    &-name {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &-stats {
+    @include glass-card;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0;  
+    border-radius: $radius-lg;
+    margin-top: 6rem;
+
+    &-item {
+      display: flex;
+      gap: 1rem;
+      padding: 2rem;
+      color: $color-glass-card-foreground-muted;
+      white-space: nowrap;
+    }
+
+    @include media(">=desktop") {
+      grid-template-columns: repeat(3, 1fr);
+    } 
+  }
+}

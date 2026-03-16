@@ -1,0 +1,129 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Kit About Page Styles
+// ──────────────────────────────────────────────────────────────
+
+.kit-about {
+  padding: 0;
+
+  &__container {
+    @include layout-cols(12);
+
+    gap: 2rem;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-4xl;
+    font-weight: $font-weight-semibold;
+    margin-bottom: 1rem;
+  }
+
+  &__subtitle {
+    color: $color-foreground-muted;
+    font-size: $text-lg;
+    line-height: $line-height-relaxed;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &--checkbox {
+      flex-direction: row;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  }
+
+  &__terms-link {
+    color: $color-primary;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      color: $color-primary-hover;
+    }
+  }
+
+  &__input,
+  &__textarea,
+  &__select {
+    width: 100%;
+  }
+
+  &__textarea {
+    min-height: 200px;
+    resize: vertical;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  // Logo upload section
+
+  &__logo-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  &__logo-preview {
+    flex-shrink: 0;
+    align-self: center;
+    height: 10rem;
+    aspect-ratio: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__logo-upload {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__logo-title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-lg;
+    font-weight: $font-weight-medium;
+  }
+
+  &__logo-description {
+    color: $color-foreground-muted;
+    font-family: $font-body;
+    font-size: $text-sm;
+    line-height: $line-height-relaxed;
+  }
+}

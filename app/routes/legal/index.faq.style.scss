@@ -1,0 +1,135 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.faq {
+  padding-inline: $spacing-x-site;
+  padding-top: 12rem;
+
+  &__container {
+    @include layout-cols(12);
+
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    @include media(">=desktop") {
+      @include layout-cols(8);
+    }
+  }
+
+  &__title {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-3xl;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-snug;
+    letter-spacing: $letter-spacing-loose;
+    text-align: center;
+
+    @include media(">=tablet") {
+      font-size: $text-4xl;
+    }
+  }
+
+  &__description {
+    max-width: 65ch;
+    color: $color-foreground-muted;
+    font-size: $text-lg;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-relaxed;
+    text-align: center;
+    margin: 0 auto;
+
+    @include media(">=tablet") {
+      font-size: $text-xl;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__item {
+    @include glass-card;
+
+    overflow: hidden;
+    border: none;
+    border-radius: $radius-lg;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      background: $color-glass-card-hover;
+    }
+  }
+
+  &__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    border-radius: $radius-lg;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      background: color.change($color-glass-card-hover, $lightness: 25%);
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+
+    @include media(">=tablet") {
+      font-size: $text-xl;
+    }
+  }
+
+  &__question-text {
+    flex: 1;
+    padding-right: 1rem;
+    color: $color-glass-card-foreground;
+    font-size: $text-lg;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-relaxed;
+    margin: 0;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $color-glass-card-foreground;
+    transition: transform $transition-duration-unit $transition-ease-in-out;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__answer {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height $transition-duration-unit $transition-ease-in-out,
+      padding $transition-duration-unit $transition-ease-in-out;
+
+    &--open {
+      max-height: 500px;
+      padding: 0 2rem 2rem;
+    }
+  }
+
+  &__answer-text {
+    padding-top: 2rem;
+    color: $color-glass-card-foreground;
+    opacity: 0.8;
+    font-size: $text-md;
+    line-height: $line-height-relaxed;
+    margin: 0;
+
+    @include media(">=tablet") {
+      font-size: $text-lg;
+    }
+  }
+}

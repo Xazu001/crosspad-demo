@@ -1,0 +1,218 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.btn {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  font-family: $font-body;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // Variant styles
+
+  &--primary {
+    @include button-primary;
+  }
+
+  &--card {
+    @include button-card;
+  }
+
+  &--secondary {
+    @include button-secondary;
+  }
+
+  &--outline {
+    @include button-outline;
+  }
+
+  &--outline-card {
+    @include button-outline-card;
+  }
+
+  &--outline-background {
+    @include button-outline-background;
+  }
+
+  &--outline-secondary {
+    @include button-outline-secondary;
+  }
+
+  &--outline-popover {
+    @include button-outline-popover;
+  }
+
+  &--ghost {
+    @include button-ghost;
+  }
+
+  &--kit-play-main {
+    background-color: var(--kit-play-color-main);
+    color: var(--kit-play-color-main-foreground) !important;
+    border-color: var(--kit-play-color-main);
+
+    @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+      filter: brightness(85%);
+    }
+  }
+
+  &--kit-play-card {
+    background-color: var(--kit-play-color-card);
+    color: var(--kit-play-color-foreground);
+    border-color: var(--kit-play-color-card-border);
+
+    &.btn--active {
+      color: var(--kit-play-color-main);
+    }
+
+    @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+      filter: brightness(125%);
+    }
+  }
+
+  &--glass {
+    @include button-glass;
+  }
+
+  &--glass-card {
+    @include button-glass-card;
+  }
+
+  &--glass-secondary {
+    @include button-glass-secondary;
+  }
+
+  &--glass-destructive {
+    @include button-glass-destructive;
+  }
+
+  &--glass-success {
+    @include button-glass-success;
+  }
+
+  &--destructive {
+    @include button-destructive;
+  }
+
+  &--aspect-square {
+    // Ensure icons and content are centered
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    aspect-ratio: 1 / 1;
+    
+    // Override any padding that might affect the square shape
+    padding: 0;
+    
+    // For size-specific adjustments
+
+    &.btn--sm {
+      width: 4rem;
+      height: 4rem;
+    }
+    
+    &.btn--md {
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+    
+    &.btn--lg {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+  }
+
+  &[data-state="disabled"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+
+  &[data-state="loading"] {
+    color: transparent;
+    cursor: progress;
+    
+    &:hover {
+      transform: none;
+    }
+
+    .btn__dots {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      gap: 0.25em;
+      transform: translate(-50%, -50%);
+    }
+
+    .btn__dot {
+      width: 0.25em;
+      height: 0.25em;
+      border-radius: 50%;
+      animation: bounce 1.4s ease-in-out infinite both;
+
+      &:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 0s;
+      }
+    }
+
+    .btn__text--loading {
+      opacity: 0;
+    }
+  }
+
+  &__dots {
+    display: inline-block;
+  }
+
+  &--no-padding-inline {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  &--radius-full {
+    border-radius: $radius-full !important;
+  }
+
+  // Size variants
+  @include responsive-sizes("btn", sm md lg) using ($size) {
+    @if $size == sm {
+      @include button-sm;
+    } @else if $size == md {
+      @include button-md;
+    } @else if $size == lg {
+      @include button-lg;
+    }
+  }
+
+  @include media("<=tablet") {
+    cursor: none;
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}

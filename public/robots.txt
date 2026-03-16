@@ -1,0 +1,11 @@
+User-agent: *
+
+Disallow: /admin
+Disallow: /api
+Disallow: /kit/create
+Disallow: /kit/edit
+Disallow: /profile
+
+Allow: /
+
+Sitemap: https://dev.crosspad.app/sitemap.xml

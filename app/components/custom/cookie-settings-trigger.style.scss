@@ -1,0 +1,45 @@
+// ──────────────────────────────────────────────────────────────
+// Cookie Settings Trigger Styles
+// ──────────────────────────────────────────────────────────────
+
+@use "sass:color" as color;
+@use "../../abstracts/tokens" as *;
+
+.cookie-settings-trigger {
+  background: none;
+  color: $color-foreground-muted;
+  border: none;
+  font-size: $text-sm;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+  text-decoration-color: color.change($color-foreground-muted, $alpha: 0.3);
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: $color-foreground;
+    text-decoration-color: $color-foreground;
+  }
+
+  &:focus-visible {
+    border-radius: $radius-sm;
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+.cookie-settings-trigger--button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  
+  .icon {
+    color: $color-foreground-muted;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+  }
+
+  &:hover .icon {
+    color: $color-foreground;
+  }
+}

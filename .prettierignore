@@ -1,0 +1,2 @@
+# Ignore SCSS files, as they are handled by Stylelint
+**/*.scss

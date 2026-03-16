@@ -1,0 +1,51 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Mobile Input Modal
+// ──────────────────────────────────────────────────────────────
+
+.mobile-input-modal-background {
+  // Base styles
+  display: flex !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 100 !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: color.change($color-background, $alpha: 80%) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.mobile-input-modal-card {
+  @include card;
+  
+  width: 90vw;
+  max-width: 400px;
+  padding: 1.5rem;
+  animation: modal-show 0.2s $transition-ease-in-out;
+  
+  // Elements
+
+  input {
+    width: 100%;
+    font-size: $text-lg;
+    text-align: center;
+  }
+}
+
+// Animations
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

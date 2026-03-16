@@ -1,0 +1,61 @@
+@use "@abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+// Transfer Modal (shared by TransferModal and ViewCodeModal)
+// ──────────────────────────────────────────────────────────────
+
+.transfer-modal {
+  @include modal-content;
+
+  &__title {
+    @include modal-title;
+  }
+
+  &__message {
+    @include modal-message;
+  }
+
+  &__code-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__code {
+    padding: 1rem;
+    background-color: $color-secondary;
+    border-radius: $radius-md;
+    font-size: $text-sm;
+    word-break: break-all;
+
+    code {
+      color: $color-foreground;
+    }
+  }
+
+  &__expiry {
+    margin: 0;
+    color: $color-foreground-muted;
+    font-size: $text-sm;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  &__copy-btn {
+    align-self: flex-start;
+  }
+
+  &__generate {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__error {
+    @include modal-error;
+  }
+}

@@ -1,0 +1,942 @@
+@use "tokens" as *;
+@use "sass:color";
+
+// ──────────────────────────────────────────────────────────────
+// Responsive Size System
+// ──────────────────────────────────────────────────────────────
+
+/**
+ * Generate responsive size classes for components
+ * Creates both base size classes and responsive breakpoint classes
+ * 
+ * @param {String} $component-name - Component name for CSS classes
+ * @param {List} $sizes - List of size variants (default: sm md lg)
+ * 
+ * Usage:
+ * .component {
+ *   @include responsive-sizes("component", sm md lg) using ($size) {
+ *     @if $size == sm {
+ *       padding: 0.5rem;
+ *       font-size: $text-sm;
+ *     } @else if $size == md {
+ *       padding: 0.75rem;
+ *       font-size: $text-md;
+ *     } @else if $size == lg {
+ *       padding: 1rem;
+ *       font-size: $text-lg;
+ *     }
+ *   }
+ * }
+ */
+@mixin responsive-sizes($component-name, $sizes: sm md lg) {
+  // Generate base size classes (for single size prop)
+  @each $size in $sizes {
+    &--#{$size} {
+      @content($size);
+    }
+  }
+  
+  // Generate responsive breakpoint classes (for responsiveSize prop)
+  @each $size in $sizes {
+    @include media(">=phone") {
+      &--phone-#{$size} {
+        @content($size);
+      }
+    }
+    
+    @include media(">=tablet") {
+      &--tablet-#{$size} {
+        @content($size);
+      }
+    }
+    
+    @include media(">=desktop") {
+      &--desktop-#{$size} {
+        @content($size);
+      }
+    }
+    
+    @include media(">=large-desktop") {
+      &--large-desktop-#{$size} {
+        @content($size);
+      }
+    }
+  }
+}
+
+@mixin logo-wordmark {
+  color: $color-primary;
+  font-family: $font-header;
+  font-weight: $font-weight-semibold;
+}
+
+@mixin section-title {
+  color: $color-primary;
+  font-family: $font-header;
+  font-size: $text-lg;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+}
+
+@mixin card {
+  padding: 2rem;
+  background: $color-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+}
+
+@mixin glass-card {
+  padding: 2rem;
+  background: $color-glass-card;
+  border: 1px solid $color-border-alpha;
+  border-radius: $radius-lg;
+}
+
+@mixin input-clear {
+  // Reset all input styles
+  // Remove padding and margins
+  padding: 0;
+  margin: 0;
+  
+  // Remove background
+  background: transparent;
+  color: inherit;
+  
+  // Remove borders
+  border: none;
+  border-radius: 0;
+  
+  // Remove shadows
+  box-shadow: none;
+  outline: none;
+  
+  // Inherit font properties from parent
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  appearance: none;
+  
+  // Remove default styles for specific input types
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+  
+  &::-ms-clear,
+  &::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  
+  &[type="number"] {
+    appearance: textfield;
+  }
+  
+  &[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  
+  &[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}
+
+@mixin glass($shadow: true, $only-background: false, $hover: false, $active: false) {
+  $bg-alpha: 0.25;
+  $blur: 40px;
+  
+  background: color.change($color-popover, $alpha: $bg-alpha);
+  backdrop-filter: blur($blur) saturate(180%);
+
+  @if $only-background == false {
+    border: 1px solid $color-border-alpha;
+
+    @if $shadow {
+      box-shadow: 0 8px 32px 0 rgb(0 0 0 / 10%);
+    }
+  }
+
+  @if $active {
+    &--active {
+      background-color: color.change($color-popover, $alpha: $bg-alpha - 0.25);
+    }
+  }
+
+  @if $hover {
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      background-color: color.change($color-popover, $alpha: $bg-alpha + 0.2);
+    }
+  }
+}
+
+@mixin glass-input {
+  @include glass($shadow: false);
+
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &:focus-visible {
+    background: color.change($color-popover, $alpha: 0.4);
+    border: 2px solid $color-primary;
+    outline: none;
+  }
+}
+
+// Focus visible styles mixin - contains only the visual styles
+@mixin focus-visible-style($outline-offset: 2px, $asBorder: false) {
+  transition: none;
+
+  @if $asBorder {
+    border: 2px solid white;
+    border-radius: inherit;
+  } @else {
+    outline: 2px solid white;
+    outline-offset: $outline-offset;
+  }
+}
+
+// Focus visible mixin for keyboard navigation accessibility
+@mixin focus-visible($outline-offset: 2px) {
+  &:focus-visible {
+    @include focus-visible-style($outline-offset);
+  }
+}
+
+@mixin interactive-state($selectors: null) {
+  @if $selectors {
+    @include media(">=desktop") {
+      #{$selectors}:hover {
+        @content;
+      }
+    }
+    
+    @media (hover: none) {
+      #{$selectors}:active {
+        @content;
+      }
+    }
+  } @else {
+    @include media(">=desktop") {
+      &:hover {
+        @content;
+      }
+    }
+    
+    @media (hover: none) {
+      &:active {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin scroll {
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: color.change($color-popover, $alpha: 0.1);
+    border-radius: 0.25rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: color.scale($color-popover, $lightness: 20%);
+    border-radius: 0.25rem;
+
+    &:hover {
+      background: color.scale($color-popover, $lightness: 25%);
+    }
+  }
+}
+
+@mixin pad-base {
+  --box-shadow-size: 12px;
+
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background-color: var(--kit-play-color-main);
+  border: 1px solid var(--kit-play-color-border) !important;
+  border-radius: $radius-md;
+  user-select: none;
+  touch-action: none;
+  transition: all $transition-duration-unit $transition-ease-in-out,
+    box-shadow 0.6s ease-out;
+
+  & .ripple {
+    background-color: color-mix(in srgb, var(--kit-play-color-main), rgb(255 255 255 / 50%));
+  }
+
+  @include media(">=tablet") {
+    cursor: pointer;
+    user-select: auto;
+
+    &:hover {
+      background-color: var(--kit-play-color-main-hover) !important;
+    }
+  }
+}
+
+@mixin pad-active {
+  box-shadow: 0 0 var(--box-shadow-size) var(--kit-play-color-main-hover);
+  transition: box-shadow 0.3s ease-out;
+}
+
+@mixin pad-pressed {
+  background-color: var(--kit-play-color-main-hover) !important;
+  transform: scale(0.98);
+}
+
+@mixin pad-toggled {
+  &::after {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    width: 2.5rem;
+    aspect-ratio: 1;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      transparent calc(var(--progress, 0) * 3.6deg),
+      rgb(255 255 255 / 80%) calc(var(--progress, 0) * 3.6deg),
+      rgb(255 255 255 / 80%) 360deg
+    );
+    backdrop-filter: brightness(150%);
+    border-radius: 50%;
+    content: "";
+    mask: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='progress-mask'%3E%3Crect width='20' height='20' fill='white'/%3E%3Ccircle cx='10' cy='10' r='7' fill='black'/%3E%3C/mask%3E%3Crect width='20' height='20' fill='black' mask='url(%23progress-mask)'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
+// Button size mixins
+@mixin button-sm {
+  gap: 0.5rem;
+  height: 4rem;
+  padding-inline: 1.25rem;
+  border-radius: $radius-sm;
+  font-size: $text-sm;
+}
+
+@mixin button-md {
+  gap: 0.75rem;
+  height: 4.5rem;
+  padding-inline: 1.5rem;
+  border-radius: $radius-md;
+  font-size: $text-md;
+}
+
+@mixin button-lg {
+  gap: 1rem;
+  height: 5.5rem;
+  padding-inline: 2rem;
+  border-radius: $radius-lg;
+  font-size: $text-lg;
+}
+
+@mixin button-primary {
+  background-color: $color-primary;
+  color: $color-primary-foreground;
+
+  &.btn--active {
+    background-color: $color-primary-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-primary-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-primary-hover;
+  }
+}
+
+@mixin button-card {
+  background-color: $color-card;
+  color: $color-card-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-card-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-card-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-card-hover;
+  }
+}
+
+@mixin button-secondary {
+  background-color: $color-secondary;
+  color: $color-secondary-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-secondary-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-secondary-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-secondary-hover;
+  }
+}
+
+@mixin button-outline {
+  background-color: transparent;
+  color: $color-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-popover-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+  }
+}
+
+@mixin button-outline-background {
+  background-color: $color-background;
+  color: $color-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-popover-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+    border-color: $color-secondary;
+  }
+}
+
+@mixin button-outline-card {
+  background-color: $color-card;
+  color: $color-card-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-card-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-card-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-card-hover;
+  }
+}
+
+@mixin button-outline-secondary {
+  background-color: $color-secondary;
+  color: $color-secondary-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-secondary-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-secondary-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-secondary-hover;
+  }
+}
+
+@mixin button-outline-popover {
+  background-color: $color-popover;
+  color: $color-popover-foreground;
+  border: 1px solid $color-border;
+
+  &.btn--active {
+    background-color: $color-popover-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-popover-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-popover-hover;
+  }
+}
+
+@mixin button-ghost {
+  background-color: $color-ghost; // Ghost default is transparent
+  color: $color-ghost-foreground;
+
+  &.btn--active {
+    background-color: $color-ghost-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-ghost-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-ghost-hover;
+  }
+}
+
+@mixin button-glass {
+  @include glass($shadow: false);
+
+  color: $color-foreground;
+
+  &.btn--active {
+    background: color.change($color-popover, $alpha: 0.1);
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background: color.change($color-popover, $alpha: 0.45);
+  }
+}
+
+@mixin button-glass-card {
+  background: $color-glass-card;
+  backdrop-filter: blur(40px) saturate(180%);
+  color: $color-glass-card-foreground;
+  border: 1px solid $color-border-alpha;
+
+  &.btn--active {
+    background: $color-glass-card-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-glass-card-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background: $color-glass-card-hover;
+  }
+}
+
+@mixin button-glass-secondary {
+  background: $color-glass-secondary;
+  backdrop-filter: blur(40px) saturate(180%);
+  color: $color-glass-secondary-foreground;
+  border: 1px solid $color-border-alpha;
+
+  &.btn--active {
+    background: $color-glass-secondary-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-glass-secondary-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background: $color-glass-secondary-hover;
+  }
+}
+
+@mixin button-glass-destructive {
+  background: $color-glass-destructive;
+  backdrop-filter: blur(40px) saturate(180%);
+  color: $color-glass-destructive-foreground;
+  border: 1px solid $color-border-alpha;
+
+  &.btn--active {
+    background: $color-glass-destructive-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-glass-destructive-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background: $color-glass-destructive-hover;
+  }
+}
+
+@mixin button-glass-success {
+  background: $color-glass-success;
+  backdrop-filter: blur(40px) saturate(180%);
+  color: $color-glass-success-foreground;
+  border: 1px solid $color-border-alpha;
+
+  &.btn--active {
+    background: $color-glass-success-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-glass-success-foreground;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background: $color-glass-success-hover;
+  }
+}
+
+@mixin button-destructive {
+  background-color: $color-destructive;
+  color: $color-destructive-foreground;
+  border: 1px solid $color-destructive;
+
+  &.btn--active {
+    background-color: $color-destructive-active;
+    border-color: $color-destructive-active;
+  }
+
+  &[data-state="loading"] .btn__dot {
+    background-color: $color-destructive-foreground;
+  }
+
+  &:active:not([data-state="disabled"], [data-state="loading"]) {
+    background-color: $color-destructive-active;
+    border-color: $color-destructive-active;
+  }
+
+  @include interactive-state('&:not([data-state="disabled"], [data-state="loading"])') {
+    background-color: $color-destructive-hover;
+    border-color: $color-destructive-hover;
+  }
+}
+
+@mixin button-group-item-base {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+  font-family: $font-body;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  user-select: none;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &:focus-visible {
+    z-index: 1;
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+
+  @include media("<=tablet") {
+    cursor: none;
+  }
+}
+
+@mixin button-group-item-active-card {
+  background-color: $color-card-active;
+}
+
+@mixin button-group-item-active-primary {
+  background-color: $color-primary-active;
+  border-color: $color-primary-active;
+}
+
+@mixin button-group-item-active-secondary {
+  background-color: $color-secondary-active;
+}
+
+@mixin button-group-item-active-outline {
+  background-color: $color-popover-active;
+  color: $color-popover-foreground;
+}
+
+@mixin button-group-item-active-outline-background {
+  background-color: $color-popover-active;
+  color: $color-popover-foreground;
+}
+
+@mixin button-group-item-active-glass {
+  background: color.change($color-popover, $alpha: 0.1);
+}
+
+@mixin button-group-item-active-glass-card {
+  background: $color-glass-card-active;
+}
+
+@mixin button-group-item-active-glass-secondary {
+  background: $color-glass-secondary-active;
+}
+
+@mixin button-group-card {
+  background-color: $color-card;
+  color: $color-card-foreground;
+  border-color: $color-border;
+
+  .btn-group--row &:not(:last-child) {
+    border-right-color: $color-border;
+  }
+
+  .btn-group--column &:not(:last-child) {
+    border-bottom-color: $color-border;
+  }
+
+  &.btn-group__item--active {
+    @include button-group-item-active-card;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background-color: $color-card-hover;
+  }
+}
+
+@mixin button-group-primary {
+  background-color: $color-primary;
+  color: $color-primary-foreground;
+  border-color: $color-primary;
+
+  .btn-group--row &:not(:last-child) {
+    border-right-color: color.scale($color-primary, $lightness: -10%);
+  }
+
+  .btn-group--column &:not(:last-child) {
+    border-bottom-color: color.scale($color-primary, $lightness: -10%);
+  }
+
+  &.btn-group__item--active {
+    @include button-group-item-active-primary;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background-color: $color-primary-hover;
+    border-color: $color-primary-hover;
+  }
+}
+
+@mixin button-group-secondary {
+  background-color: $color-secondary;
+  color: $color-secondary-foreground;
+  border-color: $color-border;
+
+  .btn-group--row &:not(:last-child) {
+    border-right-color: $color-border;
+  }
+
+  .btn-group--column &:not(:last-child) {
+    border-bottom-color: $color-border;
+  }
+
+  &.btn-group__item--active {
+    @include button-group-item-active-secondary;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background-color: $color-secondary-hover;
+    border-color: $color-border;
+  }
+}
+
+@mixin button-group-outline {
+  background-color: transparent;
+  color: $color-foreground;
+  border-color: $color-border;
+
+  .btn-group--row &:not(:last-child) {
+    border-right-color: $color-border;
+  }
+
+  .btn-group--column &:not(:last-child) {
+    border-bottom-color: $color-border;
+  }
+
+  &.btn-group__item--active {
+    @include button-group-item-active-outline;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background-color: color-mix(in srgb, currentcolor 10%, rgb(0 0 0 / 10%));
+  }
+}
+
+@mixin button-group-outline-background {
+  background-color: $color-background;
+  color: $color-foreground;
+  border-color: $color-border;
+
+  .btn-group--row &:not(:last-child) {
+    border-right-color: $color-border;
+  }
+
+  .btn-group--column &:not(:last-child) {
+    border-bottom-color: $color-border;
+  }
+
+  &.btn-group__item--active {
+    @include button-group-item-active-outline-background;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background-color: color-mix(in srgb, currentcolor 10%, rgb(0 0 0 / 10%));
+  }
+}
+
+@mixin button-group-glass {
+  @include glass($shadow: false);
+
+  color: $color-foreground;
+
+  &.btn-group__item--active {
+    @include button-group-item-active-glass;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background: color.change($color-popover, $alpha: 0.5);
+  }
+}
+
+@mixin button-group-glass-card {
+  background: $color-glass-card;
+  backdrop-filter: blur(40px) saturate(180%);
+  border-color: $color-border-alpha;
+  color: $color-glass-card-foreground;
+
+  &.btn-group__item--active {
+    @include button-group-item-active-glass-card;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background: $color-glass-card-hover;
+  }
+}
+
+@mixin button-group-glass-secondary {
+  background: $color-glass-secondary;
+  backdrop-filter: blur(40px) saturate(180%);
+  border-color: $color-border-alpha;
+  color: $color-glass-secondary-foreground;
+
+  &.btn-group__item--active {
+    @include button-group-item-active-glass-secondary;
+  }
+
+  @include interactive-state("&:not(:disabled, &--disabled)") {
+    background: $color-glass-secondary-hover;
+  }
+}
+
+@mixin button-group-row-adjacent {
+  &:not(:last-child) {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &:not(:first-child, :last-child) {
+    border-radius: 0;
+  }
+}
+
+@mixin button-group-column-adjacent {
+  &:not(:last-child) {
+    border-bottom: none;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &:not(:first-child) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &:not(:first-child, :last-child) {
+    border-radius: 0;
+  }
+}
+
+@mixin modal-background {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: color.change($color-background, $alpha: 80%);
+  backdrop-filter: blur(4px);
+}
+
+// ──────────────────────────────────────────────────────────────
+// Modal Content Mixins
+// ──────────────────────────────────────────────────────────────
+
+@mixin modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+@mixin modal-title {
+  margin: 0;
+  font-family: $font-header;
+  font-size: $text-xl;
+  font-weight: $font-weight-semibold;
+}
+
+@mixin modal-message {
+  margin: 0;
+  color: $color-foreground-muted;
+
+  strong {
+    color: $color-foreground;
+  }
+}
+
+@mixin modal-error {
+  margin: 0;
+  color: $color-destructive;
+  font-size: $text-sm;
+}
+
+@mixin modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}

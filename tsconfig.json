@@ -1,0 +1,28 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.cloudflare.json" },
+    { "path": "./packages/midifun" }
+  ],
+  "compilerOptions": {
+    "checkJs": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "types": ["./worker-configuration.d.ts", "vitest/globals", "node"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+      "midifun": ["./packages/midifun/src"],
+      "midifun/react": ["./packages/midifun/src/react"],
+      "#/*": ["./app/*"],
+      "$/*": ["./server/*"],
+      "@/*": ["./shared/*"]
+    }
+  }
+}

@@ -1,0 +1,174 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.two-factor-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  // Header
+
+  &__header {
+    text-align: center;
+
+    h3 {
+      color: $color-foreground;
+      font-size: $text-2xl;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $color-foreground-muted;
+      font-size: $text-md;
+    }
+  }
+
+  // Scan step
+
+  &__scan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__qr {
+    padding: 1rem;
+    background-color: $color-background;
+    border-radius: $radius-lg;
+
+    img {
+      display: block;
+      width: 16rem;
+      height: 16rem;
+    }
+  }
+
+  &__qr-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16rem;
+    height: 16rem;
+    color: $color-foreground-muted;
+    font-size: $text-md;
+  }
+
+  &__manual {
+    text-align: center;
+
+    h4 {
+      color: $color-foreground-muted;
+      font-size: $text-sm;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &__secret {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    code {
+      display: flex;
+      align-items: center;
+      height: 4rem;
+      padding-inline: 1rem;
+      background-color: color.change($color-primary, $alpha: 0.1);
+      color: $color-primary;
+      border-radius: $radius-sm;
+      font-family: monospace;
+      font-size: $text-lg;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  // Verify step
+
+  &__verify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__verify-input {
+    width: 100%;
+    max-width: 20rem;
+    text-align: center;
+  }
+
+  &__code-input {
+    font-size: $text-md !important;
+    letter-spacing: 0.5em;
+    text-align: center;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  &__error {
+    margin-top: 0.5rem;
+    color: $color-destructive;
+    font-size: $text-sm;
+  }
+
+  // Backup codes step
+
+  &__backup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__backup-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: color.change($color-info, $alpha: 0.1);
+    border-radius: $radius-md;
+
+    svg {
+      flex-shrink: 0;
+      color: $color-info;
+    }
+
+    p {
+      color: $color-foreground;
+      font-size: $text-sm;
+      line-height: 1.5;
+    }
+  }
+
+  &__backup-codes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: $color-card;
+    border-radius: $radius-md;
+
+    code {
+      padding: 0.5rem;
+      background-color: $color-background;
+      color: $color-foreground;
+      border-radius: $radius-sm;
+      font-family: monospace;
+      font-size: $text-sm;
+      text-align: center;
+    }
+  }
+
+  // Actions
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+}

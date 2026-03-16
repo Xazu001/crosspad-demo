@@ -1,0 +1,52 @@
+@use "@abstracts" as *;
+@use "../tokens" as *;
+
+.kit-play-mobile {
+  &__controls-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 560px;
+    height: 100%;
+    padding: 2rem;
+  }
+
+  &__controls-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  &__control-select-wrapper {
+    flex: 1;
+    min-width: 0;
+
+    .select-trigger {
+      height: $panel-button-height !important;
+    }
+  }
+
+  &__edit-config-btn {
+    @include secondary-button;
+
+    aspect-ratio: 1;
+  }
+
+  &__control-message {
+    color: var(--kit-play-color-foreground);
+    opacity: 0.75;
+    font-size: $text-sm;
+    text-align: center;
+
+    &--error {
+      color: $color-destructive;
+      opacity: 1;
+    }
+
+    &--loading {
+      font-style: italic;
+    }
+  }
+}

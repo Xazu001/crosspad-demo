@@ -1,0 +1,13 @@
+@use "@abstracts" as *;
+
+.kit-play-desktop__modal {
+  position: relative;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  
+  &--active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

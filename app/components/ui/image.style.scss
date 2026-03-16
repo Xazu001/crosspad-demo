@@ -1,0 +1,134 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.image {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: $color-card;
+  transition: opacity $transition-duration-unit $transition-ease-in-out;
+
+  // ──────────────────────────────────────────────────────────────
+  // Elements
+  // ──────────────────────────────────────────────────────────────
+  // Skeleton loader
+
+  &__skeleton {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background-color: color.scale($color-card, $lightness: 5%);
+  }
+
+  &__skeleton-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color.scale($color-foreground, $alpha: -92%) 50%,
+      transparent 100%
+    );
+    animation: image-shimmer 1.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  // Custom loader wrapper
+
+  &__loader {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: color.scale($color-card, $lightness: 5%);
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // States
+  // ──────────────────────────────────────────────────────────────
+
+  &--loading {
+    img {
+      opacity: 0;
+    }
+  }
+
+  &--fade-in:not(&--loading) {
+    img {
+      animation: image-fade-in $transition-duration-unit $transition-ease-in-out forwards;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Object-fit modifiers
+  // ──────────────────────────────────────────────────────────────
+
+  &--cover img {
+    object-fit: cover;
+  }
+
+  &--contain img {
+    object-fit: contain;
+  }
+
+  &--fill img {
+    object-fit: fill;
+  }
+
+  &--none img {
+    object-fit: none;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Border-radius modifiers
+  // ──────────────────────────────────────────────────────────────
+
+  &--radius-none {
+    
+  }
+
+  &--radius-sm {
+    border-radius: $radius-sm;
+  }
+
+  &--radius-md {
+    border-radius: $radius-md;
+  }
+
+  &--radius-lg {
+    border-radius: $radius-lg;
+  }
+
+  &--radius-xl {
+    border-radius: $radius-xl;
+  }
+
+  &--radius-full {
+    border-radius: $radius-full;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Animations
+// ──────────────────────────────────────────────────────────────
+
+@keyframes image-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

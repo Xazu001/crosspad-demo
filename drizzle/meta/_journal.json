@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1769643373769,
+      "tag": "0000_simple_bruce_banner",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1769644451778,
+      "tag": "0001_icy_domino",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1771796419810,
+      "tag": "0002_striped_sister_grimm",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1771884000000,
+      "tag": "0003_massive_daredevil",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1772923713039,
+      "tag": "0004_nappy_golden_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1772994138639,
+      "tag": "0005_flippant_golden_guardian",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1772996633989,
+      "tag": "0006_smiling_maddog",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1772996871321,
+      "tag": "0007_talented_greymalkin",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1773135940403,
+      "tag": "0008_known_psynapse",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+@use "@abstracts" as *; 
+@use "sass:color" as color;
+
+.input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  outline: none;
+  font-family: $font-body;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+  appearance: none;
+
+  // Placeholder styles
+
+  &::placeholder {
+    color: color.change($color-foreground, $alpha: 50%);
+  }
+
+  // Password toggle wrapper
+
+  &__wrapper {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+  }
+
+  // Password toggle button
+
+  &__toggle {
+    display: flex;
+    position: absolute;
+    right: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background: none;
+    color: color.change($color-foreground, $alpha: 50%);
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      background-color: color.change($color-background, $alpha: 20%);
+      color: $color-foreground;
+    }
+
+    &:focus-visible {
+      @include focus-visible;
+    }
+  }
+
+  &__toggle-icon {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  // VARIANTS
+
+  &--secondary {
+    background-color: $color-secondary-background;
+    color: $color-secondary-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--card {
+    background-color: $color-card-background;
+    color: $color-card-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--outline {
+    background-color: transparent; 
+    color: $color-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--outline-card {
+    background-color: $color-card;
+    color: $color-card-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--outline-background {
+    background-color: $color-background;
+    color: $color-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--outline-secondary {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--outline-popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+    border: 1px solid $color-border;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--glass {
+    @include glass-input;
+
+    color: $color-foreground;
+  }
+
+  &--glass-card {
+    background: $color-glass-card-background;
+    backdrop-filter: blur(8px);
+    color: $color-glass-card-foreground;
+    border: 1px solid $color-border-alpha;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--glass-secondary {
+    background: $color-glass-secondary-background;
+    backdrop-filter: blur(8px);
+    color: $color-glass-secondary-foreground;
+    border: 1px solid $color-border-alpha;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+  }
+
+  &--clean {
+    background-color: transparent;
+    color: $color-foreground;
+    border: none;
+    outline: none;
+    
+    &:focus-visible {
+      outline: none;
+    }
+    
+    &::placeholder {
+      color: color.change($color-foreground, $alpha: 40%);
+    }
+  }
+
+  &--ghost {
+    background-color: $color-ghost;
+    color: $color-ghost-foreground;
+    border: 1px solid transparent;
+
+    &::placeholder {
+      color: color.change($color-ghost-foreground, $alpha: 50%);
+    }
+
+    &:focus-visible {
+      border-color: $color-primary;
+      outline: none;
+    }
+
+    &:hover {
+      background-color: $color-ghost-hover;
+    }
+  }
+
+  // SIZES
+  @include responsive-sizes("input", sm md lg) using ($size) {
+    @if $size == sm {
+      height: 4rem;
+      padding-inline: 1.25rem;
+      border-radius: $radius-sm;
+      font-size: $text-sm;
+
+      .input__toggle {
+        right: 0.75rem;
+      }
+
+      .input__toggle-icon {
+        width: 1rem;
+        height: 1rem;
+      }
+    } @else if $size == md {
+      height: 4.5rem;
+      padding-inline: 1.5rem;
+      border-radius: $radius-md;
+      font-size: $text-md;
+
+      .input__toggle {
+        right: 1rem;
+      }
+
+      .input__toggle-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    } @else if $size == lg {
+      height: 5.5rem;
+      padding-inline: 2rem;
+      border-radius: $radius-lg;
+      font-size: $text-lg;
+
+      .input__toggle {
+        right: 1.5rem;
+      }
+
+      .input__toggle-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}

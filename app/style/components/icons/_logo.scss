@@ -1,0 +1,38 @@
+@use "@abstracts" as *;
+
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__image {
+    width: auto;
+    height: 2.5rem;
+    transition: transform $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &--small &__image {
+    height: 1.5rem;
+  }
+
+  &--large &__image {
+    height: 4rem;
+  }
+
+  &__link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    &:focus-visible {
+      border-radius: $radius-sm;
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+}

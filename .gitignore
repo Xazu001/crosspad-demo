@@ -1,0 +1,20 @@
+.env
+private/
+.DS_Store
+node_modules/
+.wrangler
+db-exports/
+worker-configuration.d.ts
+.test-kits
+.db-exports
+.secrets
+
+# React Router
+.react-router/
+.build/
+build/
+
+scripts/default-kits
+packages/midifun/node_modules/
+packages/midifun/dist/
+r2-download/

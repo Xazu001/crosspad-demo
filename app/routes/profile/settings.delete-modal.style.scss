@@ -1,0 +1,60 @@
+@use "@abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+// Delete Account Modal
+// ──────────────────────────────────────────────────────────────
+
+.profile__delete-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h3 {
+    color: $color-foreground;
+    font-family: $font-header;
+    font-size: $text-xl;
+    font-weight: $font-weight-semibold;
+  }
+
+  p {
+    color: $color-foreground-muted;
+    font-size: $text-md;
+    line-height: $line-height-relaxed;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    color: $color-foreground-muted;
+    font-size: $text-md;
+    line-height: $line-height-relaxed;
+
+    strong {
+      color: $color-foreground;
+    }
+  }
+
+  a {
+    color: $color-primary;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      color: $color-primary-hover;
+      text-decoration: underline;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+}

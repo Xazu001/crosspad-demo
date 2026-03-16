@@ -1,0 +1,178 @@
+// ──────────────────────────────────────────────────────────────
+// Cookie Consent Component Styles
+// ──────────────────────────────────────────────────────────────
+
+@use "@abstracts" as *;
+
+// Cookie Banner - Fixed at bottom of page
+
+.cookie-consent-banner {
+  display: flex;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  justify-content: center;
+  padding: 1rem;
+
+  &__container {
+    @include card;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 96rem;
+    padding: 1.5rem;
+    background: $color-popover;
+    box-shadow: $shadow-lg;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $color-primary;
+    margin-top: 0.5rem;
+    margin-right: 1rem;
+  }
+
+  &__title {
+    color: $color-secondary-foreground;
+    font-family: $font-header;
+    font-size: $text-xl;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+  }
+
+  &__description {
+    color: $color-secondary-foreground-muted;
+    font-size: $text-sm;
+    line-height: $line-height-regular;
+    margin-top: 0.25rem;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+}
+
+// Cookie Preferences Modal - using UI Modal component
+// Only custom styles needed beyond the base modal
+
+.cookie-consent-modal {
+  // Custom header styles
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  &__title {
+    color: $color-popover-foreground;
+    font-family: $font-header;
+    font-size: $text-xl;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+  }
+
+  // Content styles
+
+  &__description {
+    color: $color-popover-foreground-muted;
+    font-size: $text-sm;
+    line-height: $line-height-regular;
+    margin-top: 1.5rem;
+  }
+
+  &__categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  &__category {
+    padding: 1rem;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    transition: all $transition-duration-unit $transition-ease-in-out;
+
+    &:hover {
+      background: $color-popover-background;
+    }
+
+    &--required {
+      background: $color-popover-background;
+      border-color: $color-primary;
+    }
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background: $color-popover-hover;
+      }
+    }
+  }
+
+  &__category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  &__category-info {
+    flex: 1;
+  }
+
+  &__category-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $color-popover-foreground;
+    font-size: $text-md;
+    font-weight: $font-weight-medium;
+    line-height: $line-height-snug;
+  }
+
+  &__category-description {
+    color: $color-popover-foreground-muted;
+    font-size: $text-sm;
+    line-height: $line-height-regular;
+    margin-top: 0.25rem;
+  }
+
+  // Footer styles
+
+  &__footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+}
+
+// Banner animation
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.cookie-consent-banner {
+  animation: slide-up $transition-duration-unit $transition-ease-in-out;
+}

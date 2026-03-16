@@ -1,0 +1,217 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.legal-nav {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  justify-content: center;
+  width: 100%;
+  padding-block: 2rem;
+  padding-inline: $spacing-x-site;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: $container-max-width;
+    padding-block: 1.5rem;
+    padding-inline: 3rem;
+    backdrop-filter: blur(12px);
+    border-radius: $radius-lg;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity $transition-duration-unit $transition-ease-in-out;
+
+    img {
+      display: block;
+      height: 3.5rem;
+    }
+
+    @include interactive-state {
+      opacity: 0.8;
+    }
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+
+    @include media("<desktop") {
+      display: none;
+    }
+  }
+
+  &__link {
+    color: $color-foreground-muted;
+    font-family: $font-body;
+    font-size: $text-md;
+    font-weight: $font-weight-regular;
+    text-decoration: none;
+    transition: color $transition-duration-unit $transition-ease-in-out;
+
+    @include interactive-state {
+      color: $color-foreground;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @include media("<desktop") {
+      display: none;
+    }
+  }
+
+  &__menu-trigger {
+    display: none !important;
+
+    @include media("<=desktop") {
+      display: flex !important;
+    }
+  }
+}
+
+// Old .legal-mobile-menu removed — replaced by AsideMenu UI component
+
+.legal-footer {
+  --color-footer-background-default: #{$color-background};
+
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 6rem;
+  background-color: var(--color-footer-background);
+  color: $color-foreground;
+  border-top: 1px solid $color-border;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-x-site;
+  }
+
+  &__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+
+    @include media(">=tablet") {
+      grid-template-columns: 2fr 3fr;
+    }
+
+    @include media(">=desktop") {
+      grid-template-columns: 1.5fr 3fr 2fr;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3rem;
+
+    .logo {
+      width: 36rem;
+      object-fit: contain;
+    }
+  }
+
+  &__nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  &__nav-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    h4 {
+      margin-bottom: 0.5rem;
+      color: $color-foreground;
+      font-family: $font-header;
+      font-size: $text-sm;
+      letter-spacing: $letter-spacing-wide;
+      text-transform: uppercase;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      color: $color-foreground-muted;
+      font-size: $text-sm;
+      text-decoration: none;
+      transition: color $transition-duration-unit $transition-ease-in-out;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__marquee {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 6rem;
+    padding: 2rem 0;
+    border-top: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__marquee-content {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+    will-change: transform;
+    
+    @include interactive-state {
+      animation-play-state: paused;
+    }
+  }
+
+  &__marquee-group {
+    display: flex;
+    flex-shrink: 0;
+    gap: 4rem;
+    padding-right: 4rem; // Match gap for seamless loop
+    
+    span {
+      color: $color-primary;
+      font-family: $font-header;
+      font-size: calc($text-0 * 0.75);
+      font-weight: $font-weight-semibold;
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+
+  100% { transform: translateX(-50%); }
+}

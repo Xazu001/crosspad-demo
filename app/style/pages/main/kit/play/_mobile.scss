@@ -1,0 +1,59 @@
+@use "@abstracts" as *;
+
+@include media("<=desktop") {
+  .kit-play-mobile {
+    &__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: $spacing-x-site;
+    }
+
+    &__pads {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 1rem;
+    }
+
+    &__pads-container {
+      --translation-value: 6rem;
+
+      display: grid;
+      position: relative;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 560px;
+      transition: all $transition-duration-unit $transition-ease-in-out;
+
+      &--active {
+        transform: translateY(var(--translation-value));
+      }
+
+      @include media(">=phone") {
+        margin-top: -10vw;
+      }
+    }
+
+    &__pad {
+      @include card;
+      @include pad-base;
+
+      &--active {
+        @include pad-active;
+      }
+
+      &--pressed {
+        @include pad-pressed;
+      }
+
+      &--toggled {
+        @include pad-toggled;
+      }
+    }
+  }
+}

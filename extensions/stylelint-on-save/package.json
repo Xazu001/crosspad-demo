@@ -1,0 +1,39 @@
+{
+  "name": "stylelint-on-save",
+  "displayName": "Stylelint On Save",
+  "description": "Runs stylelint --fix on SCSS files when saved",
+  "version": "1.0.0",
+  "publisher": "crosspad",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Formatters",
+    "Linters"
+  ],
+  "activationEvents": [
+    "onLanguage:scss",
+    "onLanguage:css"
+  ],
+  "scripts": {
+    "build": "npx @vscode/vsce package --no-dependencies"
+  },
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Stylelint On Save",
+      "properties": {
+        "stylelintOnSave.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable auto-fix on save"
+        },
+        "stylelintOnSave.configFile": {
+          "type": "string",
+          "default": "stylelint.config.js",
+          "description": "Path to stylelint config file"
+        }
+      }
+    }
+  }
+}

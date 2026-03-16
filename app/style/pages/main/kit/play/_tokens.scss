@@ -1,0 +1,20 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+
+$panel-button-height: 6rem;
+
+// Common layout mixins for play panel buttons (colors handled by btn variants)
+
+// Layout for main action buttons (play, record)
+@mixin main-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $panel-button-height !important;
+}
+
+// Layout for secondary card buttons (+/-, reset, export)
+@mixin secondary-button {
+  height: $panel-button-height !important;
+}

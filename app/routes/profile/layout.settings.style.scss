@@ -1,0 +1,123 @@
+@use "@abstracts" as *;
+
+// Forward component styles
+@forward "./settings.delete-modal.style";
+
+.profile__content-settings {
+  &-totp {
+    margin-bottom: 2rem;
+
+    &-wrapper {
+      @include glass-card;
+
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+
+      & p {
+        color: $color-glass-card-foreground-muted;
+      }
+    }
+
+    &-tutorial {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &-transfer {
+    margin-bottom: 2rem;
+
+    &-wrapper {
+      @include glass-card;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    &-input {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    &-error {
+      width: 100%;
+      margin: 0;
+      color: $color-destructive;
+      font-size: $text-sm;
+    }
+
+    &-hint {
+      margin-top: 0.75rem;
+      color: $color-foreground-muted;
+      font-size: $text-sm;
+    }
+
+    &-codes {
+      margin-bottom: 2rem;
+
+      &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      &-item {
+        @include glass-card;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        &-info {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        &-name {
+          font-weight: $font-weight-semibold;
+        }
+
+        &-code {
+          padding: 0.25rem 0.5rem;
+          background-color: $color-secondary;
+          border-radius: $radius-sm;
+          font-size: $text-sm;
+        }
+
+        &-expires {
+          color: $color-foreground-muted;
+          font-size: $text-sm;
+        }
+      }
+    }
+  }
+
+  &-delete-wrapper {
+    @include glass-card;
+
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+
+    & p {
+      color: $color-glass-card-foreground-muted;
+    }
+
+    & a {
+      font-weight: $font-weight-medium;
+    }
+  }
+}

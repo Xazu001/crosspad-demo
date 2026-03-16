@@ -1,0 +1,127 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.btn-group {
+  display: inline-flex;
+  position: relative;
+
+  // Direction variants
+
+  &--row {
+    flex-direction: row;
+  }
+
+  &--column {
+    flex-direction: column;
+  }
+
+  // Disabled state
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  // Elements
+
+  &__item {
+    @include button-group-item-base;
+
+    // Focus state
+
+    &:focus-visible {
+      position: relative;
+      z-index: 1;
+      outline: none;
+
+      &::after {
+        @include focus-visible-style($asBorder: true);
+
+        position: absolute;
+        inset: -2px;
+        z-index: 1;
+        content: "";
+        pointer-events: none;
+      }
+    }
+
+    // Active state
+    // Active colors are applied by variant mixins
+
+    // Disabled states
+
+    &:disabled,
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+
+    // Size variants
+
+    &--sm {
+      @include button-sm;
+    }
+
+    &--md {
+      @include button-md;
+    }
+
+    &--lg {
+      @include button-lg;
+    }
+
+    // Row direction styling
+
+    .btn-group--row & {
+      @include button-group-row-adjacent;
+    }
+
+    // Column direction styling
+
+    .btn-group--column & {
+      @include button-group-column-adjacent;
+    }
+
+    // Variant styles
+
+    &--primary {
+      @include button-group-primary;
+    }
+
+    &--card {
+      @include button-group-card;
+    }
+
+    &--secondary {
+      @include button-group-secondary;
+    }
+
+    &--outline {
+      @include button-group-outline;
+    }
+
+    &--outline-background {
+      @include button-group-outline-background;
+    }
+
+    &--glass {
+      @include button-group-glass;
+    }
+
+    &--glass-card {
+      @include button-group-glass-card;
+    }
+
+    &--glass-secondary {
+      @include button-group-glass-secondary;
+    }
+
+    @include media("<=tablet") {
+      cursor: none;
+    }
+  }
+}

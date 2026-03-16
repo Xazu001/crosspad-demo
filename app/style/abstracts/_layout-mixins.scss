@@ -1,0 +1,44 @@
+@use "tokens" as *;
+@use "sass:math";
+@use "mixins" as *;
+
+
+// GRID CONFIGURATION
+$grid-columns: 12;
+$grid-columns-tablet: 10;
+$grid-columns-mobile: 6;
+$grid-gutter: 2.5rem;
+
+
+@function get-col-width($cols, $total-cols: $grid-columns) {
+  $total-gutters-width: calc((#{$total-cols} - 1) * #{$grid-gutter});
+  $single-col-width: calc((100% - #{$total-gutters-width}) / #{$total-cols});
+
+  @return calc(
+    #{$single-col-width} * #{$cols} + (#{$cols} - 1) * #{$grid-gutter}
+  );
+}
+
+
+@mixin layout-cols($cols: $grid-columns) {
+  margin-inline: auto;
+  width: 100%;
+
+  @include media(">=tablet") {
+    @if $cols == $grid-columns {
+      max-width: #{$container-max-width};
+    } @else {
+      max-width: get-col-width($cols, $grid-columns);
+    }
+  }
+}
+
+@mixin grid-auto($min-width: 250px, $gap: 2rem) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin section-full-width {
+  padding-inline: 0;
+}

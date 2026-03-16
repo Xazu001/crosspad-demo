@@ -1,0 +1,48 @@
+@use "@abstracts" as *;
+
+// ──────────────────────────────────────────────────────────────
+// Forward kit styles
+// ──────────────────────────────────────────────────────────────
+
+@forward "kit";
+
+.main-footer {
+  margin-top: 6rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  padding: 2rem $spacing-x-site;
+  padding-right: 0;
+  color: $color-primary;
+  border-top: 1px solid $color-border;
+  text-align: center;
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    color: $color-foreground;
+    white-space: nowrap;
+    
+    img {
+      width: 16rem;
+      object-fit: contain;
+    }
+  }
+
+  & > div:last-child {
+    display: none;
+  }
+
+  @include media(">=tablet") {
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    padding-right: $spacing-x-site;
+
+    & > div:last-child {
+      display: block;
+    }
+  }
+}

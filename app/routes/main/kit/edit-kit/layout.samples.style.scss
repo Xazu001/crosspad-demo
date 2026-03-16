@@ -1,0 +1,24 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Kit Create Modal Styles
+// ──────────────────────────────────────────────────────────────
+
+.kit-create-modal {
+  &__sample-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__actions {
+    padding-top: 4rem;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+}

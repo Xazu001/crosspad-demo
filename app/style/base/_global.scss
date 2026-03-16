@@ -1,0 +1,78 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Global Styles
+// ──────────────────────────────────────────────────────────────
+
+* {
+  @include media("<=tablet") {
+    cursor: none !important;
+  }
+}
+
+body {
+  background-color: $color-background;
+}
+
+hr {
+  border: 1px solid $color-border;
+}
+
+button {
+  // Ensure keyboard focus is visible
+  @include focus-visible;
+
+  cursor: pointer;
+}
+
+// Focus styles for all interactive elements (except buttons which are handled separately)
+// This includes links, inputs, textareas, selects, and any element with a positive tabindex attribute
+
+a, input, textarea, select, [tabindex]:not([tabindex="-1"]) {
+  @include focus-visible;
+}
+
+.shader-canvas {
+  display: flex;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+
+  &__viewport {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Skip link styles
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  z-index: 9999;
+  padding: 8px;
+  background: $color-primary;
+  color: $color-primary-foreground;
+  border-radius: $radius-sm;
+  text-decoration: none;
+  transition: top 0.3s;
+
+  &:focus {
+    top: 6px;
+  }
+}
+
+.link-decorated {
+  color: $color-primary;
+  text-decoration: underline;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &:hover {
+    color: color.scale($color-primary, $lightness: 20%);
+  }
+}

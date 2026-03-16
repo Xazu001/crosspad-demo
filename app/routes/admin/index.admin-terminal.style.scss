@@ -1,0 +1,177 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Admin CLI Page Layout
+// ──────────────────────────────────────────────────────────────
+
+.admin-cli {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0.5rem;
+  background-color: $color-background;
+
+  &__container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Admin Terminal Component
+// ──────────────────────────────────────────────────────────────
+
+.admin-terminal {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100rem;
+  height: 80vh;
+  background-color: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  font-size: $text-md;
+
+  // ──────────────────────────────────────────────────────────────
+  // Header
+  // ──────────────────────────────────────────────────────────────
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: color.change($color-foreground, $alpha: 5%);
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__title {
+    color: $color-primary;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__status {
+    color: $color-foreground-muted;
+    font-size: $text-md;
+
+    &:has(.processing) {
+      color: $color-secondary;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Logs Area
+  // ──────────────────────────────────────────────────────────────
+
+  &__logs {
+    overflow-y: auto;
+    flex: 1;
+    padding: 1.5rem;
+    background-color: $color-background;
+
+    // Custom scrollbar
+
+    &::-webkit-scrollbar {
+      width: 0.8rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-border;
+      border-radius: $radius-sm;
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Log Entry
+  // ──────────────────────────────────────────────────────────────
+
+  &__log {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+
+    &--info {
+      color: $color-foreground;
+    }
+
+    &--success {
+      color: $color-primary;
+    }
+
+    &--error {
+      color: $color-destructive;
+    }
+
+    &--warning {
+      color: $color-info;
+    }
+
+    &--command {
+      color: $color-foreground;
+    }
+  }
+
+  &__timestamp {
+    flex-shrink: 0;
+    color: $color-foreground-muted;
+    font-size: $text-md;
+  }
+
+  &__message {
+    flex: 1;
+  }
+
+  &__command-line {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__command-text {
+    color: $color-foreground-muted;
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Input Area
+  // ──────────────────────────────────────────────────────────────
+
+  &__input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background-color: color.change($color-foreground, $alpha: 2%);
+    border-top: 1px solid $color-border;
+  }
+
+  &__prompt {
+    flex-shrink: 0;
+    color: $color-primary;
+  }
+
+  &__input {
+    @include input-clear;
+
+    flex: 1;
+    color: $color-foreground;
+    caret-color: $color-primary;
+    margin-inline: 2rem;
+
+    &::placeholder {
+      color: $color-foreground-muted;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+}

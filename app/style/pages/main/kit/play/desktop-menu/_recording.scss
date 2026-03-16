@@ -1,0 +1,93 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+@use "../tokens" as *;
+@use "./tokens" as local;
+
+.kit-play-desktop {
+  &__recording-wrapper {
+    @include local.panel-wrapper;
+  }
+
+  &__recording-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  &__recording-title {
+    color: var(--kit-play-color-foreground);
+    font-size: $text-2xl;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__recording-time-display {
+    color: var(--kit-play-color-main);
+    font-family: $font-header;
+    font-size: $text-2xl;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__recording-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__recording-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__recording-main-controls {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__recording-btn {
+    @include main-button;
+
+    gap: 1rem;
+    min-width: 12rem;
+  }
+
+  &__recording-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__recording-action-btn {
+    @include secondary-button;
+
+    gap: 0.5rem;
+    min-width: 8rem;
+  }
+
+  &__recording-info {
+    display: flex;
+    gap: 2rem;
+    padding: 1.5rem;
+    background-color: $color-card;
+    border-radius: $radius-md;
+  }
+
+  &__recording-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__recording-stat-label {
+    color: var(--kit-play-color-foreground);
+    opacity: 0.7;
+    font-size: $text-sm;
+  }
+
+  &__recording-stat-value {
+    color: var(--kit-play-color-foreground);
+    font-size: $text-lg;
+    font-weight: $font-weight-medium;
+  }
+}

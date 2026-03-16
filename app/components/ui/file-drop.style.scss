@@ -1,0 +1,103 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.file-drop {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-card;
+  border: 2px dashed $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // Hover state
+
+  &:hover:not([data-disabled="true"]) {
+    background-color: $color-card-hover;
+  }
+
+  // Sizes
+
+  &--md {
+    min-height: 16rem;
+    padding: 2rem;
+  }
+
+  // Variants
+
+  &--error {
+    border-color: $color-destructive;
+    background-color: $color-destructive-background !important;
+  }
+
+  // Disabled state
+
+  &[data-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Elements
+
+.file-drop__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.file-drop__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.file-drop__icon {
+  color: $color-foreground-muted;
+  transition: color $transition-duration-unit $transition-ease-in-out;
+
+  .file-drop--error & {
+    color: $color-destructive;
+  }
+}
+
+.file-drop__text {
+  color: $color-foreground;
+  font-size: $text-sm;
+  font-weight: $font-weight-regular;
+}
+
+.file-drop__button {
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+  text-decoration: underline;
+  cursor: pointer;
+  pointer-events: all;
+
+  &:hover {
+    color: $color-primary-hover;
+  }
+}
+
+.file-drop__error {
+  color: $color-destructive;
+  font-weight: $font-weight-medium;
+}
+
+.file-drop__hint {
+  color: $color-foreground-muted;
+  font-size: $text-sm;
+  margin-top: 0.5rem;
+}

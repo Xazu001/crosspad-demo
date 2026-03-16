@@ -1,0 +1,104 @@
+// ──────────────────────────────────────────────────────────────
+// Forward profile styles
+// ──────────────────────────────────────────────────────────────
+
+@forward "./layout.settings.style";
+@forward "./layout.profile.style";
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Profile Page Styles
+// ──────────────────────────────────────────────────────────────
+
+.profile {
+  position: relative;
+  overflow-x: hidden;
+  height: 100dvh;
+  padding-top: $spacing-top-site;
+
+  &__top-bar {
+    display: grid;
+    position: fixed;
+    top: 2rem;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    padding-inline: $spacing-x-site;
+
+    > .profile__menu-trigger {
+      display: flex;
+      justify-self: end;
+
+      @include media(">=tablet") {
+        display: none;
+      }
+    }
+
+    .btn {
+      width: 6rem !important;
+      height: 6rem !important;
+      border-radius: $radius-full;
+    }
+  }
+
+  &__container {
+    @include layout-cols;
+
+    @include media(">=tablet") {
+      @include layout-cols(10);
+
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8rem;
+    }
+
+    @include media(">=desktop") {
+      @include layout-cols(8);
+    }
+  }
+
+  &__menu {
+    display: none;
+    flex-direction: column;
+
+    @include media(">=tablet") {
+      display: flex;
+      grid-column: span 5;
+    }
+
+    @include media(">=desktop") {
+      grid-column: span 4;
+    }
+
+    @include media(">=large-desktop") {
+      grid-column: span 5;
+    }
+
+    @include media(">=xlarge-desktop") {
+      grid-column: span 4;
+    } 
+  }
+
+  &__content {
+    flex-grow: 0;
+
+    @include media(">=tablet") {
+      grid-column: span 7;
+    }
+
+    @include media(">=desktop") {
+      grid-column: span 8;
+    }
+
+    @include media(">=large-desktop") {
+      grid-column: span 7;
+    }
+
+    @include media(">=xlarge-desktop") {
+      grid-column: span 8;
+    } 
+  }
+}

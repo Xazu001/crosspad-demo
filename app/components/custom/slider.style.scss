@@ -1,0 +1,85 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.slider {
+  // Elements
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    font-size: $text-lg;
+  }
+
+  // MUI overrides
+
+  .MuiSlider-track {
+    height: 100% !important;
+    background: $color-primary !important;
+    border: none !important;
+  }
+
+  .MuiSlider-rail {
+    height: 100% !important;
+    background: transparent !important;
+    border: 1px solid $color-primary !important;
+  }
+
+  .MuiSlider-thumb {
+    width: 30px !important;
+    height: 100% !important;
+    opacity: 0 !important;
+
+    &:hover {
+      opacity: 0 !important;
+    }
+
+    &.Mui-active {
+      opacity: 0 !important;
+    }
+  }
+
+  // States
+
+  &:focus-visible {
+    @include focus-visible;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    .MuiSlider-thumb {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  // Variants
+
+  &--kit-play {
+    // Kit play variant uses CSS custom properties
+
+    .slider__label {
+      color: var(--kit-play-color-foreground) !important;
+    }
+    
+    .MuiSlider-track {
+      background: var(--kit-play-color-main) !important;
+    }
+
+    .MuiSlider-rail {
+      border-color: var(--kit-play-color-main) !important;
+    }
+
+    &:focus-visible {
+      outline-color: white;
+    }
+  }
+
+  // Responsive
+  @include media(">=desktop") {
+    height: 1.5rem !important;
+  }
+}

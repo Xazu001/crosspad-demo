@@ -1,0 +1,102 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  font-family: $font-body;
+  font-weight: $font-weight-medium;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // ADDITIONAL
+
+  &__additional {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: color.change($color-foreground, $alpha: 50%);
+    font-weight: $font-weight-regular;
+
+    &--sm {
+      font-size: $text-sm;
+    }
+
+    &--md {
+      font-size: $text-md;
+    }
+
+    &--lg {
+      font-size: $text-lg;
+    }
+
+    &-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
+    &--destructive {
+      color: $color-destructive;
+    }
+  }
+
+  // MODIFIERS
+
+  &--no-padding-bottom {
+    padding-bottom: 0 !important;
+  }
+
+  &--full-width {
+    width: 100% !important;
+  }
+
+  &--no-border {
+    border: none !important;
+  }
+
+  &--uppercase {
+    text-transform: uppercase !important;
+  }
+
+  &--truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  &--center {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  &--right {
+    justify-content: flex-end !important;
+    text-align: right !important;
+  }
+
+  &--left {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  // SIZES
+  @include responsive-sizes("label", sm md lg) using ($size) {
+    @if $size == sm {
+      padding-bottom: 0.5rem;
+      font-size: $text-sm;
+    } @else if $size == md {
+      padding-bottom: 0.75rem;
+      font-size: $text-md;
+    } @else if $size == lg {
+      padding-bottom: 1rem;
+      font-size: $text-lg;
+    }
+  }
+}

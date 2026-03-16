@@ -1,0 +1,22 @@
+{
+  "manualLinks": {
+    "app/components/pages/home/WhatWeDo.tsx": "app/style/pages/home/_what-we-do.scss",
+    "app/components/ui/button.tsx": "app/style/components/ui/_button.scss",
+    "app/routes/home.tsx": "app/style/pages/home/_index.scss",
+    "app/components/custom/beams.client.tsx": "app/style/components/custom/_beams.scss",
+    "app/components/ui/input.tsx": "app/style/components/ui/_input.scss",
+    "app/components/ui/label.tsx": "app/style/components/ui/_label.scss",
+    "app/components/ui/modal.tsx": "app/style/components/ui/_modal.scss",
+    "app/components/ui/file-drop.tsx": "app/style/components/ui/_file-drop.scss",
+    "app/routes/main/kit/create/index.tsx": "app/style/pages/main/kit/_samples.scss",
+    "app/routes/main/kit/create/modes.tsx": "app/style/pages/main/kit/_modes.scss",
+    "app/components/ui/select.tsx": "app/style/components/ui/_select.scss",
+    "app/routes/main/kit/create/about.tsx": "app/style/pages/main/kit/_about.scss",
+    "app/routes/main/kit/play.$id.tsx": "app/style/pages/main/kit/_play.scss",
+    "app/components/ui/slider.tsx": "app/style/components/ui/_slider.scss",
+    "app/components/custom/kit-play-mobile-menu.tsx": "app/style/pages/main/kit/_play-mobile.scss",
+    "app/components/ui/ripple.tsx": "app/style/components/ui/_ripple.scss",
+    "app/components/custom/kit-play-desktop-menu.tsx": "app/style/pages/main/kit/_play-desktop.scss",
+    "app/components/ui/avatar.tsx": "app/style/components/ui/_avatar.scss"
+  }
+}

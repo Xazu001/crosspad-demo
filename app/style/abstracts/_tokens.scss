@@ -1,0 +1,243 @@
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Design Tokens
+// ──────────────────────────────────────────────────────────────
+// Central configuration for all design system values.
+// Import this file to access colors, typography, spacing, etc.
+
+// ──────────────────────────────────────────────────────────────
+// Breakpoints
+// ──────────────────────────────────────────────────────────────
+// Used with @include media(">=tablet") mixin
+
+$site-breakpoints: (
+  "phone": 480px,
+  "tablet": 768px,
+  "desktop": 1024px,
+  "large-desktop": 1440px,
+  "xlarge-desktop": 1720px,
+  "huge": 1920px,
+);
+
+@forward "include-media" with (
+  $breakpoints: $site-breakpoints
+);
+
+// ──────────────────────────────────────────────────────────────
+// Typography
+// ──────────────────────────────────────────────────────────────
+
+// Font families
+$font-body: "Montserrat", sans-serif;
+$font-header: "Syne", sans-serif;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+
+// Line heights
+$line-height-none: 1;
+$line-height-regular: 1.5;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+$line-height-relaxed-more: 1.75;
+$line-height-loose: 2;
+
+// Letter spacing
+$letter-spacing-none: 0;
+$letter-spacing-tight: -0.05em;
+$letter-spacing-normal: 100%;
+$letter-spacing-loose: 0.025em;
+$letter-spacing-wide: 0.05em;
+
+// Font sizes (CSS custom properties)
+$text-sm: var(--text-sm);
+$text-md: var(--text-md);
+$text-lg: var(--text-lg);
+$text-xl: var(--text-xl);
+$text-2xl: var(--text-2xl);
+$text-3xl: var(--text-3xl);
+$text-4xl: var(--text-4xl);
+$text-5xl: var(--text-5xl);
+$text-0: var(--text-0);
+
+// ──────────────────────────────────────────────────────────────
+// Radius
+// ──────────────────────────────────────────────────────────────
+
+$radius-unit: 1rem;
+$radius-sm: calc($radius-unit);
+$radius-md: calc($radius-unit * 1.25);
+$radius-lg: calc($radius-unit * 1.5);
+$radius-xl: calc($radius-unit * 2);
+$radius-2xl: calc($radius-unit * 3);
+$radius-full: 9999px;
+
+// ──────────────────────────────────────────────────────────────
+// Spacing
+// ──────────────────────────────────────────────────────────────
+
+$spacing-x-site: var(--spacing-x-site);
+$spacing-top-site: 24rem;
+
+// ──────────────────────────────────────────────────────────────
+// Layout
+// ──────────────────────────────────────────────────────────────
+
+$container-max-width: var(--container-max-width);
+
+// ──────────────────────────────────────────────────────────────
+// Colors
+// ──────────────────────────────────────────────────────────────
+// Using OKLCH color space for better consistency and accessibility
+// Epic Games Launcher inspired theme with enhanced blue tones
+
+// Base colors
+$color-background: oklch(18% 0.019 274.6deg); // Dark blue-tinted background
+$color-foreground: oklch(95% 0.005 250deg); // Slightly blue-tinted white
+$color-foreground-muted: color.scale($color-foreground, $alpha: -30%);
+
+// Semantic colors
+// Almost all colors have: default, foreground, hover, active, and background variants
+// Background variants is for background for inputs, file inputs, etc.
+
+// Primary - Original green color for CTAs and important actions
+$color-primary: oklch(81.1% 0.213 130.6deg);
+$color-primary-foreground: oklch(18% 0.01 260deg);
+$color-primary-hover: color.scale($color-primary, $lightness: 50%);
+$color-primary-active: color.scale($color-primary, $lightness: 25%);
+$color-primary-background: color.change($color-primary, $alpha: 25%); // Subtle background highlight
+
+// Secondary - elevated surfaces with unique blue tone
+$color-secondary: oklch(30% 0.024 273.4deg);
+$color-secondary-foreground: oklch(92% 0.008 250deg); // Muted foreground
+$color-secondary-foreground-muted: color.scale($color-secondary-foreground, $alpha: -40%);
+
+// States derived from secondary base color
+$color-secondary-background: color.scale($color-secondary, $lightness: -10%);
+$color-secondary-hover: color.scale($color-secondary, $lightness: 5%);
+$color-secondary-active: color.scale($color-secondary, $lightness: 15%);
+
+// Card - first elevation level with unique blue tone
+$color-card: oklch(22.1% 0.024 273.4deg); // Different blue tone than secondary
+$color-card-foreground: oklch(93% 0.008 250deg); // Card text
+$color-card-foreground-muted: color.scale($color-card-foreground, $alpha: -40%);
+
+// States derived from card base color
+$color-card-background: color.scale($color-card, $lightness: -10%);
+$color-card-hover: color.scale($color-card, $lightness: 25%);
+$color-card-active: color.scale($color-card, $lightness: -10%);
+
+// Popover - second elevation level with unique blue tone
+$color-popover: oklch(22% 0.02 275.8deg); // Another unique blue tone
+$color-popover-foreground: oklch(94% 0.008 250deg); // Popover text
+$color-popover-foreground-muted: color.scale($color-popover-foreground, $alpha: -40%);
+
+// States derived from popover base color
+$color-popover-background: color.scale($color-popover, $lightness: -10%);
+$color-popover-hover: color.scale($color-popover, $lightness: 10%);
+$color-popover-active: color.scale($color-popover, $lightness: 15%);
+
+// Border colors - derived from surface colors
+$color-border: oklch(38.5% 0.021 274.3deg); // Subtle borders
+
+// Destructive - errors and dangerous actions (red with blue tint)
+$color-destructive: oklch(60% 0.20 20deg); // Red with slight blue influence
+$color-destructive-foreground: oklch(95% 0.005 250deg); // Use main foreground
+$color-destructive-hover: oklch(65% 0.22 20deg); // Lighter red
+$color-destructive-active: oklch(55% 0.18 20deg); // Darker red
+$color-destructive-background: color.change($color-destructive, $alpha: 25%); // Subtle background highlight
+
+// Success - successful actions and confirmations (green with blue tint)
+$color-success: oklch(70% 0.15 160deg); // Blue-tinted green
+$color-success-foreground: oklch(5% 0.01 250deg); // Dark for contrast
+$color-success-hover: oklch(75% 0.17 160deg); // Lighter green
+$color-success-active: oklch(65% 0.13 160deg); // Darker green
+$color-success-background: color.change($color-success, $alpha: 25%); // Subtle background highlight
+
+// Info - informational content and neutral actions (blue accent)
+$color-info: oklch(65% 0.12 230deg); // Muted blue accent
+$color-info-foreground: oklch(95% 0.005 250deg); // Use main foreground
+$color-info-hover: oklch(70% 0.14 230deg); // Lighter blue
+$color-info-active: oklch(60% 0.10 230deg); // Darker blue
+$color-info-background: color.change($color-info, $alpha: 25%); // Subtle background highlight
+
+// Ghost - inverted style for subtle actions
+$color-ghost: oklch(95% 0.005 250deg); // Use main foreground as background
+$color-ghost-foreground: oklch(18% 0.019 274.6deg); // Use main background as text
+$color-ghost-hover: oklch(85% 0.005 250deg); // Darker foreground
+$color-ghost-active: oklch(75% 0.005 250deg); // Even darker
+
+// Glass Card - glass morphism with card color tones
+$color-glass-card: color.change($color-card, $alpha: 0.25);
+$color-glass-card-foreground: $color-card-foreground;
+$color-glass-card-foreground-muted: color.scale($color-card-foreground, $alpha: -40%);
+$color-glass-card-hover: color.change($color-card, $alpha: 0.5);
+$color-glass-card-active: color.change($color-card, $alpha: 0.1);
+$color-glass-card-background: color.change($color-card, $alpha: 0.15);
+
+// Glass Secondary - glass morphism with secondary color tones
+$color-glass-secondary: color.change($color-secondary, $alpha: 0.25);
+$color-glass-secondary-foreground: $color-secondary-foreground;
+$color-glass-secondary-foreground-muted: color.scale($color-secondary-foreground, $alpha: -40%);
+$color-glass-secondary-hover: color.change($color-secondary, $alpha: 0.5);
+$color-glass-secondary-active: color.change($color-secondary, $alpha: 0.1);
+$color-glass-secondary-background: color.change($color-secondary, $alpha: 0.15);
+
+// Glass Popover - glass morphism with popover color tones
+$color-glass-popover: color.change($color-popover, $alpha: 0.25);
+$color-glass-popover-foreground: $color-popover-foreground;
+$color-glass-popover-foreground-muted: color.scale($color-popover-foreground, $alpha: -40%);
+$color-glass-popover-hover: color.change($color-popover, $alpha: 0.5);
+$color-glass-popover-active: color.change($color-popover, $alpha: 0.1);
+$color-glass-popover-background: color.change($color-popover, $alpha: 0.15);
+
+// Glass Destructive - glass morphism with destructive color tones
+$color-glass-destructive: color.change($color-destructive, $alpha: 0.25);
+$color-glass-destructive-foreground: $color-destructive-foreground;
+$color-glass-destructive-foreground-muted: color.scale($color-destructive-foreground, $alpha: -40%);
+$color-glass-destructive-hover: color.change($color-destructive, $alpha: 0.5);
+$color-glass-destructive-active: color.change($color-destructive, $alpha: 0.1);
+$color-glass-destructive-background: color.change($color-destructive, $alpha: 0.15);
+
+// Glass Success - glass morphism with success color tones
+$color-glass-success: color.change($color-success, $alpha: 0.25);
+$color-glass-success-foreground: $color-success-foreground;
+$color-glass-success-foreground-muted: color.scale($color-success-foreground, $alpha: -40%);
+$color-glass-success-hover: color.change($color-success, $alpha: 0.5);
+$color-glass-success-active: color.change($color-success, $alpha: 0.1);
+$color-glass-success-background: color.change($color-success, $alpha: 0.15);
+
+// Glass Info - glass morphism with info color tones
+$color-glass-info: color.change($color-info, $alpha: 0.25);
+$color-glass-info-foreground: $color-info-foreground;
+$color-glass-info-foreground-muted: color.scale($color-info-foreground, $alpha: -40%);
+$color-glass-info-hover: color.change($color-info, $alpha: 0.5);
+$color-glass-info-active: color.change($color-info, $alpha: 0.1);
+$color-glass-info-background: color.change($color-info, $alpha: 0.15);
+
+// Additional border variants
+$color-border-alpha: color.change($color-border, $alpha: 50%); // Semi-transparent
+
+
+
+// ──────────────────────────────────────────────────────────────
+// Shadows
+// ──────────────────────────────────────────────────────────────
+
+$shadow-sm: 0 0px 2px 0 rgb(0 0 0 / 5%);
+$shadow-md: 0 0px 6px -1px rgb(0 0 0 / 10%);
+$shadow-lg: 0 0px 15px -3px rgb(0 0 0 / 10%);
+$shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 5%);
+
+// ──────────────────────────────────────────────────────────────
+// Motion
+// ──────────────────────────────────────────────────────────────
+
+$transition-duration-unit: 300ms;
+$transition-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+

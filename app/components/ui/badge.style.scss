@@ -1,0 +1,98 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: $font-body;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-none;
+  white-space: nowrap;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  // Elements
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+
+    svg {
+      width: 1em;
+      height: 1em;
+    }
+  }
+
+  // Variants
+
+  &--card {
+    background-color: $color-card;
+    color: $color-card-foreground;
+    border: 1px solid $color-border;
+  }
+
+  &--primary {
+    background-color: $color-primary;
+    color: $color-primary-foreground;
+  }
+
+  &--destructive {
+    background-color: $color-destructive;
+    color: oklch(100% 0 95deg);
+  }
+
+  &--success {
+    background-color: $color-success;
+    color: oklch(18% 0.01 260deg);
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: $color-foreground;
+    border: 1px solid $color-border;
+  }
+
+  &--outline-card {
+    background-color: $color-card;
+    color: $color-card-foreground;
+    border: 1px solid $color-border;
+  }
+
+  &--outline-background {
+    background-color: $color-background;
+    color: $color-foreground;
+    border: 1px solid $color-border;
+  }
+
+  &--outline-secondary {
+    background-color: $color-secondary;
+    color: $color-secondary-foreground;
+    border: 1px solid $color-border;
+  }
+
+  &--outline-popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+    border: 1px solid $color-border;
+  }
+
+  // Sizes
+  @include responsive-sizes("badge", sm md lg) using ($size) {
+    @if $size == sm {
+      height: 2.25rem;
+      padding-inline: 1rem;
+      border-radius: $radius-sm;
+      font-size: $text-sm;
+    } @else if $size == md {
+      height: 2.5rem;
+      padding-inline: 1.25rem;
+      border-radius: $radius-md;
+      font-size: $text-md;
+    } @else if $size == lg {
+      height: 2.75rem;
+      padding-inline: 1.5rem;
+      border-radius: $radius-lg;
+      font-size: $text-lg;
+    }
+  }
+}

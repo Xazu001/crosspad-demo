@@ -1,0 +1,35 @@
+@use "@abstracts" as *;
+
+.mobile-message {
+  display: none;
+
+  @include media("<=tablet") {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: $spacing-x-site;
+    background-color: $color-background;
+    color: $color-foreground;
+    text-align: center;
+
+    &__content {
+      width: 100%;
+      font-family: $font-body;
+      font-size: $text-2xl;
+      font-weight: $font-weight-medium;
+      line-height: $line-height-relaxed;
+    }
+
+    &__description {
+      color: $color-foreground;
+      font-size: $text-xl;
+      margin-bottom: 2rem;
+    }
+  }
+}

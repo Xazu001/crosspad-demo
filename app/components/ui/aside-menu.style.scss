@@ -1,0 +1,195 @@
+@use "@abstracts" as *;
+@use "sass:color" as color;
+
+// ──────────────────────────────────────────────────────────────
+// Aside Menu Root
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu {
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  flex-direction: column;
+  gap: 4rem;
+  width: min(50rem, 85vw);
+  height: 100dvh;
+  padding: 3rem;
+  border-left: 1px solid $color-border;
+  transition: transform $transition-duration-unit $transition-ease-in-out;
+  will-change: transform;
+
+  &[data-state="closed"] {
+    transform: translateX(100%);
+  }
+
+  &[data-state="open"] {
+    transform: translateX(0);
+  }
+
+  // Variants
+
+  &--glass-popover {
+    background: $color-glass-popover;
+    backdrop-filter: blur(40px) saturate(180%);
+    color: $color-glass-popover-foreground;
+    border-left-color: $color-border-alpha;
+  }
+
+  &--popover {
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+  }
+
+  // Breakpoint modifiers — hide panel above a given breakpoint
+
+  &--hide-tablet {
+    @include media(">=tablet") {
+      display: none;
+    }
+  }
+
+  &--hide-desktop {
+    @include media(">=desktop") {
+      display: none;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Overlay
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: color.change(#000, $alpha: 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-duration-unit $transition-ease-in-out;
+
+  &[data-state="open"] {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  // Breakpoint modifiers
+
+  &--hide-tablet {
+    @include media(">=tablet") {
+      display: none;
+    }
+  }
+
+  &--hide-desktop {
+    @include media(">=desktop") {
+      display: none;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Header (close button)
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu__header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Item
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu__item {
+  display: block;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  color: $color-foreground-muted;
+  border: none;
+  border-radius: $radius-md;
+  font-family: $font-header;
+  font-size: $text-xl;
+  font-weight: $font-weight-medium;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-duration-unit $transition-ease-in-out;
+
+  &--active {
+    color: $color-primary;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// Item hover cascaded from variant
+
+.aside-menu--glass-popover .aside-menu__item {
+  &--active {
+    background-color: $color-glass-popover;
+  }
+
+  @include interactive-state {
+    background-color: $color-glass-popover-hover;
+    color: $color-glass-popover-foreground;
+  }
+}
+
+.aside-menu--popover .aside-menu__item {
+  &--active {
+    background-color: $color-popover-hover;
+  }
+
+  @include interactive-state {
+    background-color: $color-popover-hover;
+    color: $color-popover-foreground;
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Content (custom non-item content)
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+// ──────────────────────────────────────────────────────────────
+// Footer
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: auto;
+
+  a {
+    width: 100%;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// Trigger
+// ──────────────────────────────────────────────────────────────
+
+.aside-menu-trigger {
+  display: flex;
+  appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
