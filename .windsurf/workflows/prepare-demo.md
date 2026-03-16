@@ -9,7 +9,7 @@ Convert repository to public demo version by removing sensitive files and replac
 
 ## 1. Remove Sensitive Files
 
-Delete production config files:
+Delete production config files (YOU HAVE TO DELETE THEM):
 
 ```bash
 # Remove wrangler configs

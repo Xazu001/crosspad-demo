@@ -10,7 +10,7 @@ Complete guide for configuring the Crosspad demo version.
 | ------------------ | --------- | ---------------------------- |
 | Node.js            | 20+       |                              |
 | pnpm               | 8+        | `npm install -g pnpm`        |
-| Wrangler CLI       | 4+        | `pnpm add -g wrangler`       |
+| Wrangler CLI       | 4+        | `pnpm i -g wrangler`        |
 | Cloudflare Account | Free tier | https://dash.cloudflare.com/ |
 
 ---
@@ -63,14 +63,14 @@ wrangler d1 create crosspad-demo
 wrangler r2 bucket create crosspad-demo
 
 # KV Namespace
-wrangler kv:namespace create crosspad-demo
+wrangler kv namespace create crosspad-demo
 # → Copy id to wrangler.jsonc
 
 # Queue (main)
-wrangler queue create crosspad-demo
+wrangler queues create crosspad-demo
 
 # Queue (dead letter)
-wrangler queue create crosspad-demo-dlq
+wrangler queues create crosspad-demo-dlq
 ```
 
 ### 5. Set Secrets
@@ -124,8 +124,8 @@ pnpm dev
 | `d1_databases[].database_id`   | D1 database ID        | `wrangler d1 list`               |
 | `d1_databases[].database_name` | Database name         | From `wrangler d1 create`        |
 | `r2_buckets[].bucket_name`     | R2 bucket name        | From `wrangler r2 bucket create` |
-| `kv_namespaces[].id`           | KV namespace ID       | `wrangler kv:namespace list`     |
-| `queues[].queue`               | Queue name            | From `wrangler queue create`     |
+| `kv_namespaces[].id`           | KV namespace ID       | `wrangler kv namespace list`     |
+| `queues[].queue`               | Queue name            | `wrangler queues list`           |
 
 ---
 
@@ -279,7 +279,7 @@ wrangler r2 bucket list
 
 ```bash
 # Check if id in wrangler.jsonc is correct
-wrangler kv:namespace list
+wrangler kv namespace list
 ```
 
 ### Error: `JWT verification failed`
